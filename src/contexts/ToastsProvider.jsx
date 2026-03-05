@@ -4,23 +4,17 @@ import ToastListContainer from "../styles/Toast/ToastListContainer";
 import Toast from "../components/Toast";
 import { ToastsContext } from "./ToastsContext";
 import successIcon from "/src/assets/images/success.svg";
-import closeIconSrc from "/src/assets/images/close.svg";
 
 export const ToastsContextProvider = ({ children, maxCount = 3 }) => {
   const [toastList, setToastList] = useState([]);
   const toastId = useRef(0);
 
-  const createToast = ({
-    message,
-    icon = successIcon,
-    closeIcon = closeIconSrc,
-    duration = 5,
-  }) => {
+  const createToast = ({ message, icon = successIcon, duration = 5 }) => {
     setToastList((prev) =>
-      [
-        { id: toastId.current++, message, icon, closeIcon, duration },
-        ...prev,
-      ].slice(0, maxCount),
+      [{ id: toastId.current++, message, icon, duration }, ...prev].slice(
+        0,
+        maxCount,
+      ),
     );
   };
 
@@ -33,14 +27,13 @@ export const ToastsContextProvider = ({ children, maxCount = 3 }) => {
       {children}
       {createPortal(
         <ToastListContainer>
-          {toastList.map(({ message, id, icon, closeIcon, duration }) => (
+          {toastList.map(({ message, id, icon, duration }) => (
             <Toast
               key={id}
               id={id}
               message={message}
               closeToast={removeToast}
               icon={icon}
-              closeIcon={closeIcon}
               duration={duration}
             />
           ))}
