@@ -15,11 +15,11 @@ const Toast = ({ id, message, duration, closeToast = () => {}, icon }) => {
   return (
     <ToastContainer>
       <Left>
-        <img src={icon} alt="icon" />
+        <img src={icon} alt="icon" width={24} height={24} />
         {message}
       </Left>
       <ToastCloseButton onClick={() => closeToast(id)}>
-        <img src={closeIcon} alt="close" />
+        <img src={closeIcon} alt="close" width={24} height={24} />
       </ToastCloseButton>
     </ToastContainer>
   );
