@@ -1,12 +1,11 @@
-import { useState } from "react";
-import CardImg from "./components/common/CardImg";
+import Avatar from "./components/common/Avatar/Avatar";
+import Textarea from "./components/common/Textarea/Textarea";
 
 const App = () => {
-  const [selectedImage] = useState("/profile.svg");
-
   return (
     <div>
-      <CardImg src={selectedImage} />
+      <Textarea></Textarea>
+      <Avatar />
     </div>
   );
 };

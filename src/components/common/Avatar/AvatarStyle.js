@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardImgContainer = styled.div`
+export const AvatarContainer = styled.div`
   width: ${(props) => props.$size};
   height: ${(props) => props.$size};
   border-radius: 50%;
