@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const EmojiBadgeContainer = styled.div`
+export const EmojiBadgeContainer = styled.div`
   padding: 8px 12px;
   border-radius: 9999px;
   font: var(--font-16-regular);
@@ -15,5 +15,3 @@ const EmojiBadgeContainer = styled.div`
     color: #ffffff;
   }
 `;
-
-export default EmojiBadgeContainer;

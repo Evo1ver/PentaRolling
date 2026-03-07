@@ -1,11 +1,11 @@
-import EmojiBadgeContainer from "../styles/Badge/EmojiBadgeStyle";
+import * as S from "../styles/Badge/EmojiBadgeStyle";
 
 const EmojiBadge = ({ emoji, number }) => {
   return (
-    <EmojiBadgeContainer>
+    <S.EmojiBadgeContainer>
       <span className="emoji">{emoji}</span>
       <span className="number">{number}</span>
-    </EmojiBadgeContainer>
+    </S.EmojiBadgeContainer>
   );
 };
 

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// TODO: 지금은 색상을 값으로 관리하지만 나중에 변수화하기
 const variants = {
   가족: {
     backgroundColor: "#3C3C43",
@@ -20,7 +19,7 @@ const variants = {
   },
 };
 
-const RelationshipBadgeContainer = styled.div`
+export const RelationshipBadgeContainer = styled.div`
   padding: 0 8px;
   border-radius: 4px;
   ${(props) => variants[props.relationship]};
@@ -28,5 +27,3 @@ const RelationshipBadgeContainer = styled.div`
   width: fit-content;
   height: 20px;
 `;
-
-export default RelationshipBadgeContainer;
