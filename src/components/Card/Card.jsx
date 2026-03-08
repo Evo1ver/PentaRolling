@@ -3,6 +3,19 @@ import Avatar from "../common/Avatar/Avatar";
 import { DeleteIconButton, PlusButton } from "../Button/Button";
 import RelationshipBadge from "../RelationshipBadge";
 
+// 내부 컴포넌트
+function ProfileSection({ name, relationship, profileImg }) {
+  return (
+    <S.ProfileRow>
+      <Avatar src={profileImg} size="56px" />
+      <S.ProfileInfo>
+        <S.ProfileName>From. {name}</S.ProfileName>
+        <RelationshipBadge relationship={relationship} />
+      </S.ProfileInfo>
+    </S.ProfileRow>
+  );
+}
+
 // 추가 카드 (+ 버튼)
 export function AddCard({ onClick }) {
   return (
@@ -17,18 +30,12 @@ export function MiniCard({ name, relationship, content, date, profileImg, showDe
   return (
     <S.MiniCardWrapper>
       <S.MiniCardHeader>
-        <S.ProfileRow>
-          <Avatar src={profileImg} size="56px" />
-          <S.ProfileInfo>
-            <S.ProfileName>From. {name}</S.ProfileName>
-            <RelationshipBadge relationship={relationship} />
-          </S.ProfileInfo>
-        </S.ProfileRow>
+        <ProfileSection name={name} relationship={relationship} profileImg={profileImg} />
         {showDeleteButton && (
           <DeleteIconButton size={36} onClick={onDelete} />
         )}
       </S.MiniCardHeader>
-      <S.MiniCardContent>{content}</S.MiniCardContent>
+      <S.CardContent>{content}</S.CardContent>
       <S.CardDate>{date}</S.CardDate>
     </S.MiniCardWrapper>
   );
@@ -49,13 +56,7 @@ export function NormalCard({ name, relationship, content, date, profileImg, show
         )}
       </S.CardHeader>
       <S.CardBody>
-        <S.ProfileRow>
-          <Avatar src={profileImg} size="56px" />
-          <S.ProfileInfo>
-            <S.ProfileName>From. {name}</S.ProfileName>
-            <RelationshipBadge relationship={relationship} />
-          </S.ProfileInfo>
-        </S.ProfileRow>
+        <ProfileSection name={name} relationship={relationship} profileImg={profileImg} />
         <S.CardContent>{content}</S.CardContent>
         <S.CardDate>{date}</S.CardDate>
       </S.CardBody>
