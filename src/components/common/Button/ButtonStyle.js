@@ -19,11 +19,11 @@ const baseButtonCss = `
 `;
 
 // ─────────────────────────────────────────────
-// Variant CSS  (함수로 정의 → styled 안에서 props 접근 가능)
+// Variant CSS
 // ─────────────────────────────────────────────
 
 // focus outline stroke: large=2px, small=1px
-const primaryFocusOutlineWidth = (size) => size === "small" ? "1px" : "2px";
+const primaryFocusOutlineWidth = (size) => (size === "small" ? "1px" : "2px");
 
 const primaryVariantCss = ({ $state, $size }) => `
   background: #737373;
@@ -41,17 +41,23 @@ const primaryVariantCss = ({ $state, $size }) => `
     cursor: not-allowed;
   }
 
-  ${$state === "hover"    && "background: #828282;"}
-  ${$state === "pressed"  && "background: #626262;"}
-  ${$state === "focus"    && `
+  ${$state === "hover" && "background: #828282;"}
+  ${$state === "pressed" && "background: #626262;"}
+  ${
+    $state === "focus" &&
+    `
     background: #242424;
     outline: ${primaryFocusOutlineWidth($size)} solid #6610f2;
     outline-offset: -2px;
-  `}
-  ${$state === "disabled" && `
+  `
+  }
+  ${
+    $state === "disabled" &&
+    `
     background: var(--gray-300);
     cursor: not-allowed;
-  `}
+  `
+  }
 `;
 
 const secondaryVariantCss = ({ $state }) => `
@@ -74,18 +80,24 @@ const secondaryVariantCss = ({ $state }) => `
     cursor: not-allowed;
   }
 
-  ${$state === "hover"    && "background: #E2F3FA; border-color: #7DCBED;"}
-  ${$state === "pressed"  && "background: #E0F3FB; border-color: #24ADE8;"}
-  ${$state === "focus"    && `
+  ${$state === "hover" && "background: #E2F3FA; border-color: #7DCBED;"}
+  ${$state === "pressed" && "background: #E0F3FB; border-color: #24ADE8;"}
+  ${
+    $state === "focus" &&
+    `
     background: var(--white);
     border-color: #2097CA;
-  `}
-  ${$state === "disabled" && `
+  `
+  }
+  ${
+    $state === "disabled" &&
+    `
     background: var(--gray-300);
     border: none;
     color: var(--white);
     cursor: not-allowed;
-  `}
+  `
+  }
 `;
 
 const outlinedVariantCss = ({ $state }) => `
@@ -107,18 +119,24 @@ const outlinedVariantCss = ({ $state }) => `
     cursor: not-allowed;
   }
 
-  ${$state === "hover"    && "background: var(--gray-100);"}
-  ${$state === "pressed"  && "background: var(--gray-100);"}
-  ${$state === "focus"    && `
+  ${$state === "hover" && "background: var(--gray-100);"}
+  ${$state === "pressed" && "background: var(--gray-100);"}
+  ${
+    $state === "focus" &&
+    `
     background: var(--white);
     border-color: var(--gray-500);
-  `}
-  ${$state === "disabled" && `
+  `
+  }
+  ${
+    $state === "disabled" &&
+    `
     background: var(--gray-300);
     border-color: var(--gray-300);
     color: var(--white);
     cursor: not-allowed;
-  `}
+  `
+  }
 `;
 
 const emojiButtonVariantCss = ({ $state }) => `
@@ -149,130 +167,151 @@ const emojiButtonVariantCss = ({ $state }) => `
     color: var(--gray-300);
   }
 
-  ${$state === "hover"    && `
+  ${
+    $state === "hover" &&
+    `
     background: var(--gray-100);
     border-color: var(--gray-500);
     color: var(--gray-700);
-  `}
-  ${$state === "pressed"  && `
+  `
+  }
+  ${
+    $state === "pressed" &&
+    `
     background: var(--gray-200);
     border-color: var(--gray-900);
     font-weight: 700;
-  `}
-  ${$state === "focus"    && `
+  `
+  }
+  ${
+    $state === "focus" &&
+    `
     border-color: var(--primary);
     outline: 2px solid var(--primary);
     outline-offset: 2px;
-  `}
-  ${$state === "disabled" && `
+  `
+  }
+  ${
+    $state === "disabled" &&
+    `
     background: var(--gray-100);
     border-color: var(--gray-200);
     color: var(--gray-300);
     cursor: not-allowed;
-  `}
+  `
+  }
 `;
 
 const variantCss = {
-  primary:      primaryVariantCss,
-  secondary:    secondaryVariantCss,
-  outlined:     outlinedVariantCss,
-  emojiButton: outlinedVariantCss,
-  deleteIcon:     outlinedVariantCss,
+  primary: primaryVariantCss,
+  secondary: secondaryVariantCss,
+  outlined: outlinedVariantCss,
+  emojiButton: emojiButtonVariantCss,
+  deleteIcon: outlinedVariantCss,
 };
 
 // ─────────────────────────────────────────────
 // Size CSS
-// border-radius, font은 size별로 관리
 // ─────────────────────────────────────────────
 const sizeCss = {
-  large:       `height: 56px; padding: 14px 24px; gap: 10px; border-radius: 12px; font: var(--font-16-bold);`,
-  small:       `height: 40px; padding: 7px 16px;  gap: 10px; border-radius: 6px;  font: var(--font-14-bold);`,
-  56:          `height: 56px; padding: 14px 16px; gap: 10px; border-radius: 12px; font: var(--font-16-bold);`,
-  40:          `height: 40px; padding: 8px 16px; gap: 10px; border-radius: 6px; font: var(--font-14-bold);`,
-  36:          `height: 36px; padding: 6px 16px; gap: 10px; border-radius: 6px; font: var(--font-14-bold);`,
-  28:          `height: 28px; padding: 2px 16px; gap: 10px; border-radius: 6px; font: var(--font-14-bold);`,
-  "icon-40":   `height: 40px; padding: 8px 16px; gap: 10px; border-radius: 6px; font: var(--font-14-bold);`,
-  "icon-36":   `height: 36px; padding: 6px 16px; gap: 10px; border-radius: 6px; font: var(--font-14-bold);`,
-  "icon-28":   `height: 28px; padding: 2px 16px; gap: 10px; border-radius: 6px; font: var(--font-14-bold);`,
+  large: `height: 56px; padding: 14px 24px; gap: 10px; border-radius: 12px; font: var(--font-16-bold);`,
+  small: `height: 40px; padding: 7px 16px;  gap: 10px; border-radius: 6px;  font: var(--font-14-bold);`,
+  56: `height: 56px; padding: 14px 16px; gap: 10px; border-radius: 12px; font: var(--font-16-bold);`,
+  40: `height: 40px; padding: 8px 16px;  gap: 10px; border-radius: 6px;  font: var(--font-14-bold);`,
+  36: `height: 36px; padding: 6px 16px;  gap: 10px; border-radius: 6px;  font: var(--font-14-bold);`,
+  28: `height: 28px; padding: 2px 16px;  gap: 10px; border-radius: 6px;  font: var(--font-14-bold);`,
+  "icon-40": `height: 40px; padding: 8px 16px;  gap: 10px; border-radius: 6px;  font: var(--font-14-bold);`,
+  "icon-36": `height: 36px; padding: 6px 16px;  gap: 10px; border-radius: 6px;  font: var(--font-14-bold);`,
+  "icon-28": `height: 28px; padding: 2px 16px;  gap: 10px; border-radius: 6px;  font: var(--font-14-bold);`,
   "square-40": `width: 40px; height: 40px; padding: 6px; border-radius: 6px;`,
   "square-36": `width: 36px; height: 36px; padding: 6px; border-radius: 6px;`,
   "square-28": `width: 28px; height: 28px; padding: 4px; border-radius: 6px;`,
 };
 
 // ─────────────────────────────────────────────
-// S. 네이밍 컨벤션
+// Styled Components
 // ─────────────────────────────────────────────
-const S = {
-  StyledButton: styled.button`
-    ${baseButtonCss}
-    ${({ $state, $variant, $size }) => (variantCss[$variant] ?? variantCss.primary)({ $state, $size })}
-    ${({ $size }) => sizeCss[$size] ?? sizeCss.large}
-  `,
+export const StyledButton = styled.button`
+  ${baseButtonCss}
+  ${({ $state, $variant, $size }) =>
+    (variantCss[$variant] ?? variantCss.primary)({ $state, $size })}
+  ${({ $size }) => sizeCss[$size] ?? sizeCss.large}
+`;
 
-  PlusButton: styled.button`
-    ${baseButtonCss}
-    width: 56px;
-    height: 56px;
-    border-radius: 100px;
-    padding: 0;
-    background: var(--gray-500);
-    color: var(--white);
+export const PlusButton = styled.button`
+  ${baseButtonCss}
+  width: 56px;
+  height: 56px;
+  border-radius: 100px;
+  padding: 0;
+  background: var(--gray-500);
+  color: var(--white);
 
-    &:hover:not(:disabled)         { background: var(--gray-600); }
-    &:active:not(:disabled)        { background: var(--gray-700); }
-    &:focus-visible:not(:disabled) {
-      background: var(--gray-700);
-      outline: 1px solid var(--gray-800);
-      outline-offset: -1px;
-    }
-    &:disabled {
-      background: var(--gray-300);
-      cursor: not-allowed;
-    }
+  &:hover:not(:disabled) {
+    background: var(--gray-600);
+  }
+  &:active:not(:disabled) {
+    background: var(--gray-700);
+  }
+  &:focus-visible:not(:disabled) {
+    background: var(--gray-700);
+    outline: 1px solid var(--gray-800);
+    outline-offset: -1px;
+  }
+  &:disabled {
+    background: var(--gray-300);
+    cursor: not-allowed;
+  }
 
-    ${({ $state }) => $state === "hover"    && "background: var(--gray-600);"}
-    ${({ $state }) => $state === "pressed"  && "background: var(--gray-700);"}
-    ${({ $state }) => $state === "focus"    && `
-      background: var(--gray-700);
-      outline: 1px solid var(--gray-800);
-      outline-offset: -1px;
-    `}
-    ${({ $state }) => $state === "disabled" && `
-      background: var(--gray-300);
-      cursor: not-allowed;
-    `}
-  `,
+  ${({ $state }) => $state === "hover" && "background: var(--gray-600);"}
+  ${({ $state }) => $state === "pressed" && "background: var(--gray-700);"}
+  ${({ $state }) =>
+    $state === "focus" &&
+    `
+    background: var(--gray-700);
+    outline: 1px solid var(--gray-800);
+    outline-offset: -1px;
+  `}
+  ${({ $state }) =>
+    $state === "disabled" &&
+    `
+    background: var(--gray-300);
+    cursor: not-allowed;
+  `}
+`;
 
-  ArrowButton: styled.button`
-    ${baseButtonCss}
-    width: 40px;
-    height: 40px;
-    border-radius: 0;
-    background: transparent;
-    color: var(--gray-900);
-    padding: 0;
+export const ArrowButton = styled.button`
+  ${baseButtonCss}
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+  background: transparent;
+  color: var(--gray-900);
+  padding: 0;
 
-    &:disabled { color: var(--gray-300); cursor: not-allowed; }
+  &:disabled {
+    color: var(--gray-300);
+    cursor: not-allowed;
+  }
 
-    ${({ $state }) => $state === "disabled" && "color: var(--gray-300); cursor: not-allowed;"}
-  `,
+  ${({ $state }) =>
+    $state === "disabled" && "color: var(--gray-300); cursor: not-allowed;"}
+`;
 
-  ToggleGroup: styled.div`
-    display: inline-flex;
-    border-radius: 0;
-    overflow: hidden;
-  `,
+export const ToggleGroup = styled.div`
+  display: inline-flex;
+  overflow: hidden;
+`;
 
-  ToggleItem: styled.button`
-    ${baseButtonCss}
-    height: 40px;
-    padding: 0 20px;
-    font: ${({ $isActive }) => ($isActive ? "var(--font-14-bold)" : "var(--font-14-regular)")};
-    background: ${({ $isActive }) => ($isActive ? "var(--white)" : "var(--gray-100)")};
-    color: ${({ $isActive }) => ($isActive ? "#2097CA" : "var(--gray-900)")};
-    border: ${({ $isActive }) => ($isActive ? "1px solid #2097CA" : "none")};
-    border-radius: 0;
-  `,
-};
-
-export const { StyledButton, PlusButton, ArrowButton, ToggleGroup, ToggleItem } = S;
+export const ToggleItem = styled.button`
+  ${baseButtonCss}
+  height: 40px;
+  padding: 0 20px;
+  font: ${({ $isActive }) =>
+    $isActive ? "var(--font-14-bold)" : "var(--font-14-regular)"};
+  background: ${({ $isActive }) =>
+    $isActive ? "var(--white)" : "var(--gray-100)"};
+  color: ${({ $isActive }) => ($isActive ? "#2097CA" : "var(--gray-900)")};
+  border: ${({ $isActive }) => ($isActive ? "1px solid #2097CA" : "none")};
+  border-radius: 0;
+`;
