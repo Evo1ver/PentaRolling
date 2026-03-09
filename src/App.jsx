@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "./components/Input";
+import Avatar from "./components/common/Avatar/Avatar";
 
 const App = () => {
   const [isError, setIsError] = useState(false);
@@ -31,6 +32,7 @@ const App = () => {
         onChange={handleChange}
         onBlur={handleBlur}
       />
+      <Avatar />
     </>
   );
 };
