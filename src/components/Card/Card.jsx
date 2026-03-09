@@ -1,6 +1,6 @@
 import * as S from "./CardStyle";
 import Avatar from "../common/Avatar/Avatar";
-import { DeleteIconButton, PlusButton } from "../Button/Button";
+import { DeleteIconButton, PlusButton } from "../common/Button/Button";
 import RelationshipBadge from "../RelationshipBadge";
 
 // 내부 컴포넌트
@@ -22,13 +22,23 @@ export const AddCard = ({ onClick }) => (
 );
 
 // 미니 카드 (심플 스타일)
-export const MiniCard = ({ name, relationship, content, date, profileImg, showDeleteButton = false, onDelete }) => (
+export const MiniCard = ({
+  name,
+  relationship,
+  content,
+  date,
+  profileImg,
+  showDeleteButton = false,
+  onDelete,
+}) => (
   <S.MiniCardWrapper>
     <S.MiniCardHeader>
-      <ProfileSection name={name} relationship={relationship} profileImg={profileImg} />
-      {showDeleteButton && (
-        <DeleteIconButton size={36} onClick={onDelete} />
-      )}
+      <ProfileSection
+        name={name}
+        relationship={relationship}
+        profileImg={profileImg}
+      />
+      {showDeleteButton && <DeleteIconButton size={36} onClick={onDelete} />}
     </S.MiniCardHeader>
     <S.CardContent>{content}</S.CardContent>
     <S.CardDate>{date}</S.CardDate>
@@ -36,7 +46,15 @@ export const MiniCard = ({ name, relationship, content, date, profileImg, showDe
 );
 
 // 브라우저 스타일 일반 카드
-export const NormalCard = ({ name, relationship, content, date, profileImg, showDeleteButton = false, onDelete }) => (
+export const NormalCard = ({
+  name,
+  relationship,
+  content,
+  date,
+  profileImg,
+  showDeleteButton = false,
+  onDelete,
+}) => (
   <S.CardWrapper>
     <S.CardHeader>
       <S.BrowserDots>
@@ -44,12 +62,14 @@ export const NormalCard = ({ name, relationship, content, date, profileImg, show
         <S.BrowserDot color="#FDD539" />
         <S.BrowserDot color="#15AC30" />
       </S.BrowserDots>
-      {showDeleteButton && (
-        <DeleteIconButton size={36} onClick={onDelete} />
-      )}
+      {showDeleteButton && <DeleteIconButton size={36} onClick={onDelete} />}
     </S.CardHeader>
     <S.CardBody>
-      <ProfileSection name={name} relationship={relationship} profileImg={profileImg} />
+      <ProfileSection
+        name={name}
+        relationship={relationship}
+        profileImg={profileImg}
+      />
       <S.CardContent>{content}</S.CardContent>
       <S.CardDate>{date}</S.CardDate>
     </S.CardBody>
