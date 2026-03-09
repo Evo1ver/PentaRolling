@@ -7,20 +7,16 @@ const sizeStyles = {
     height: 28px;
   `,
   small: css`
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
   `,
   medium: css`
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
   `,
   large: css`
     width: 80px;
     height: 80px;
-  `,
-  xlarge: css`
-    width: 108px;
-    height: 108px;
   `,
 };
 
