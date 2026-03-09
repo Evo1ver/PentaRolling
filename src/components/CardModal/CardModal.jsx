@@ -2,9 +2,19 @@ import React from "react";
 import ModalLayout from "../ModalLayout/ModalLayout";
 import Avatar from "../common/Avatar/Avatar";
 import { Button } from "../common/Button/Button";
-import RelationshipBadge from "../common/Badge/RelationshipBadge";
+import RelationshipBadge from "../common/RelationshipBadge/RelationshipBadge";
 import * as S from "./CardModalStyle";
 
+/**
+ * @param {string} name 작성자 이름
+ * @param {string} relationship 작성자와 주인과의 관계
+ * @param {string} content 작성 내용
+ * @param {string} createdDate yyyy-mm-dd 형식의 작성일
+ * @param {string} profileImg 작성자 프로필 이미지
+ * @param {string} fonts 폰트 (기본값: pretendard)
+ * @param {function} onCloseModal 모달 닫기 함수
+ * @returns
+ */
 const CardModal = ({
   name,
   relationship,
