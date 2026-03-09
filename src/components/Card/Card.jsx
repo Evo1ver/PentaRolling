@@ -4,62 +4,54 @@ import { DeleteIconButton, PlusButton } from "../Button/Button";
 import RelationshipBadge from "../RelationshipBadge";
 
 // 내부 컴포넌트
-function ProfileSection({ name, relationship, profileImg }) {
-  return (
-    <S.ProfileRow>
-      <Avatar src={profileImg} size="56px" />
-      <S.ProfileInfo>
-        <S.ProfileName>From. {name}</S.ProfileName>
-        <RelationshipBadge relationship={relationship} />
-      </S.ProfileInfo>
-    </S.ProfileRow>
-  );
-}
+const ProfileSection = ({ name, relationship, profileImg }) => (
+  <S.ProfileRow>
+    <Avatar src={profileImg} size="56px" />
+    <S.ProfileInfo>
+      <S.ProfileName>From. {name}</S.ProfileName>
+      <RelationshipBadge relationship={relationship} />
+    </S.ProfileInfo>
+  </S.ProfileRow>
+);
 
 // 추가 카드 (+ 버튼)
-export function AddCard({ onClick }) {
-  return (
-    <S.AddCardWrapper>
-      <PlusButton onClick={onClick} />
-    </S.AddCardWrapper>
-  );
-}
+export const AddCard = ({ onClick }) => (
+  <S.AddCardWrapper>
+    <PlusButton onClick={onClick} />
+  </S.AddCardWrapper>
+);
 
 // 미니 카드 (심플 스타일)
-export function MiniCard({ name, relationship, content, date, profileImg, showDeleteButton = false, onDelete }) {
-  return (
-    <S.MiniCardWrapper>
-      <S.MiniCardHeader>
-        <ProfileSection name={name} relationship={relationship} profileImg={profileImg} />
-        {showDeleteButton && (
-          <DeleteIconButton size={36} onClick={onDelete} />
-        )}
-      </S.MiniCardHeader>
-      <S.CardContent>{content}</S.CardContent>
-      <S.CardDate>{date}</S.CardDate>
-    </S.MiniCardWrapper>
-  );
-}
+export const MiniCard = ({ name, relationship, content, date, profileImg, showDeleteButton = false, onDelete }) => (
+  <S.MiniCardWrapper>
+    <S.MiniCardHeader>
+      <ProfileSection name={name} relationship={relationship} profileImg={profileImg} />
+      {showDeleteButton && (
+        <DeleteIconButton size={36} onClick={onDelete} />
+      )}
+    </S.MiniCardHeader>
+    <S.CardContent>{content}</S.CardContent>
+    <S.CardDate>{date}</S.CardDate>
+  </S.MiniCardWrapper>
+);
 
 // 브라우저 스타일 일반 카드
-export function NormalCard({ name, relationship, content, date, profileImg, showDeleteButton = false, onDelete }) {
-  return (
-    <S.CardWrapper>
-      <S.CardHeader>
-        <S.BrowserDots>
-          <S.BrowserDot color="#E40000" />
-          <S.BrowserDot color="#FDD539" />
-          <S.BrowserDot color="#15AC30" />
-        </S.BrowserDots>
-        {showDeleteButton && (
-          <DeleteIconButton size={36} onClick={onDelete} />
-        )}
-      </S.CardHeader>
-      <S.CardBody>
-        <ProfileSection name={name} relationship={relationship} profileImg={profileImg} />
-        <S.CardContent>{content}</S.CardContent>
-        <S.CardDate>{date}</S.CardDate>
-      </S.CardBody>
-    </S.CardWrapper>
-  );
-}
+export const NormalCard = ({ name, relationship, content, date, profileImg, showDeleteButton = false, onDelete }) => (
+  <S.CardWrapper>
+    <S.CardHeader>
+      <S.BrowserDots>
+        <S.BrowserDot color="#E40000" />
+        <S.BrowserDot color="#FDD539" />
+        <S.BrowserDot color="#15AC30" />
+      </S.BrowserDots>
+      {showDeleteButton && (
+        <DeleteIconButton size={36} onClick={onDelete} />
+      )}
+    </S.CardHeader>
+    <S.CardBody>
+      <ProfileSection name={name} relationship={relationship} profileImg={profileImg} />
+      <S.CardContent>{content}</S.CardContent>
+      <S.CardDate>{date}</S.CardDate>
+    </S.CardBody>
+  </S.CardWrapper>
+);
