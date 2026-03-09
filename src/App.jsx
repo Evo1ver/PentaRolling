@@ -1,38 +1,16 @@
 import { useState } from "react";
-import Input from "./components/common/Input/Input";
-import Avatar from "./components/common/Avatar/Avatar";
+import { Dropdown } from "./components/common/Dropdown/Dropdown";
+import RELATIONS from "./constants/relations";
+import FONTS from "./constants/fonts";
 
 const App = () => {
-  const [isError, setIsError] = useState(false);
-  const [value, setValue] = useState("");
-
-  const handleChange = (e) => {
-    const v = e.target.value;
-    setValue(v);
-    if (v) setIsError(false);
-  };
-
-  const handleBlur = (e) => {
-    const v = e.target.value;
-    setValue(v);
-
-    if (!v) {
-      setIsError(true);
-    } else {
-      setIsError(false);
-    }
-  };
+  const [relation, setRelation] = useState(RELATIONS[0].value);
+  const [font, setFont] = useState(FONTS[0].value);
 
   return (
     <>
-      <Input
-        value={value}
-        error={isError}
-        formType="from"
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-      <Avatar />
+      <Dropdown type={RELATIONS} value={relation} onChange={setRelation} />
+      <Dropdown type={FONTS} value={font} onChange={setFont} />
     </>
   );
 };
