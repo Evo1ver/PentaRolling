@@ -1,11 +1,39 @@
+import { useState } from "react";
+import Input from "./components/Input";
 import Avatar from "./components/common/Avatar/Avatar";
-import Textarea from "./components/common/Textarea/Textarea";
 
 const App = () => {
+  const [isError, setIsError] = useState(false);
+  const [value, setValue] = useState("");
+
+  const handleChange = (e) => {
+    const v = e.target.value;
+    setValue(v);
+    if (v) setIsError(false);
+  };
+
+  const handleBlur = (e) => {
+    const v = e.target.value;
+    setValue(v);
+
+    if (!v) {
+      setIsError(true);
+    } else {
+      setIsError(false);
+    }
+  };
+
   return (
-    <div>
+    <>
+      <Input
+        value={value}
+        error={isError}
+        formType="from"
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
       <Avatar />
-    </div>
+    </>
   );
 };
 
