@@ -12,6 +12,6 @@ export const EmojiBadgeContainer = styled.div`
   }
 
   .number {
-    color: #ffffff;
+    color: var(--white);
   }
 `;

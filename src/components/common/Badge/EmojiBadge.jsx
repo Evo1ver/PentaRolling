@@ -1,4 +1,4 @@
-import * as S from "../styles/Badge/EmojiBadgeStyle";
+import * as S from "./EmojiBadgeStyle";
 
 const EmojiBadge = ({ emoji, number }) => {
   return (
