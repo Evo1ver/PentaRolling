@@ -4,7 +4,6 @@ import Textarea from "./components/common/Textarea/Textarea";
 const App = () => {
   return (
     <div>
-      <Textarea></Textarea>
       <Avatar />
     </div>
   );
