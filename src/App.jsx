@@ -1,5 +1,11 @@
+import Textarea from "./components/Textarea/Textarea";
+
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <Textarea />
+    </>
+  );
 };
 
 export default App;
