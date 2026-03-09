@@ -7,27 +7,27 @@ const ModalContextProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalComponent, setModalComponent] = useState(null);
 
-  const openModalLayout = useCallback((component) => {
+  const openModal = useCallback((component) => {
     // JSX 형태인지 검사
     if (!React.isValidElement(component)) {
-      throw new Error("openModalLayout: JSX가 전달되지 않았습니다.");
+      throw new Error("openModal: JSX가 전달되지 않았습니다.");
     }
 
     setIsOpen(true);
     setModalComponent(component);
   }, []);
 
-  const closeModalLayout = useCallback(() => {
+  const closeModal = useCallback(() => {
     setIsOpen(false);
     setModalComponent(null);
   }, []);
 
   return (
-    <ModalContext value={{ isOpen, openModalLayout, closeModalLayout }}>
+    <ModalContext value={{ isOpen, openModal, closeModal }}>
       {children}
       {isOpen &&
         createPortal(
-          <ModalLayout closeModalLayout={closeModalLayout}>
+          <ModalLayout closeModalLayout={closeModal}>
             {modalComponent}
           </ModalLayout>,
           document.getElementById("modal-root"),
