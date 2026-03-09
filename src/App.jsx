@@ -1,39 +1,27 @@
-import { useState } from "react";
-import Input from "./components/Input";
-import Avatar from "./components/common/Avatar/Avatar";
+import CardList from "./components/CardList/CardList";
 
 const App = () => {
-  const [isError, setIsError] = useState(false);
-  const [value, setValue] = useState("");
-
-  const handleChange = (e) => {
-    const v = e.target.value;
-    setValue(v);
-    if (v) setIsError(false);
-  };
-
-  const handleBlur = (e) => {
-    const v = e.target.value;
-    setValue(v);
-
-    if (!v) {
-      setIsError(true);
-    } else {
-      setIsError(false);
-    }
-  };
+  const mockAvatars = [
+    "https://picsum.photos/id/1/200/200",
+    "https://picsum.photos/id/2/200/200",
+    "https://picsum.photos/id/3/200/200",
+  ];
 
   return (
-    <>
-      <Input
-        value={value}
-        error={isError}
-        formType="from"
-        onChange={handleChange}
-        onBlur={handleBlur}
+    <div style={{ display: "flex", gap: "20px", padding: "40px" }}>
+      <CardList
+        recipientName="SoWon"
+        backgroundColor="green"
+        avatarImageUrls={mockAvatars}
+        countBadgeCount={27}
+        messageCount={30}
+        goodCount={20}
+        loveCount={12}
+        sadCount={7}
       />
-      <Avatar />
-    </>
+
+      <CardList recipientName="친구" />
+    </div>
   );
 };
 

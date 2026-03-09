@@ -5,7 +5,7 @@ import * as S from "./AvatarStyle";
  *
  * @param {string}  [src]     - 이미지 URL (없으면 기본 아바타 표시)
  * @param {string}  [alt]     - 이미지 대체 텍스트 (기본값: "프로필 이미지")
- * @param {'xsmall'|'small'|'medium'|'large'|'xlarge'|string} [size]
+ * @param {'xsmall'|'small'|'medium'|'large'|string} [size]
  *                            - 사이즈 토큰 또는 CSS 값("80px") (기본값: "medium" → 64px)
  * @param {boolean} [selected] - 선택 상태 여부 (기본값: false)
  * @param {string}  [className] - 외부 className (styled-components 확장 지원)
