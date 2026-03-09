@@ -1,36 +1,13 @@
-import { useState } from "react";
-import Input from "./components/Input";
+import useModal from "./hooks/useModal.js";
 
 const App = () => {
-  const [isError, setIsError] = useState(false);
-  const [value, setValue] = useState("");
-
-  const handleChange = (e) => {
-    const v = e.target.value;
-    setValue(v);
-    if (v) setIsError(false);
-  };
-
-  const handleBlur = (e) => {
-    const v = e.target.value;
-    setValue(v);
-
-    if (!v) {
-      setIsError(true);
-    } else {
-      setIsError(false);
-    }
-  };
+  const { openModalLayout } = useModal();
 
   return (
     <>
-      <Input
-        value={value}
-        error={isError}
-        formType="from"
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      <button onClick={() => openModalLayout(<div>테스트</div>)}>
+        모달 열기
+      </button>
     </>
   );
 };
