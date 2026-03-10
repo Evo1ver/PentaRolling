@@ -2,14 +2,20 @@ import styled, { css } from "styled-components";
 
 export const CardContainer = styled.article`
   position: relative;
+  /* 기본 크기 (PC & 태블릿) */
   width: 275px;
   height: 260px;
   padding: 20px 20px 16px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+
   border-radius: 24px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.36);
   cursor: pointer;
   overflow: hidden;
-  border: 1px solid #000000;
+  border: 1px solid rgb(0, 0, 0);
+  transition: transform 0.2s ease;
+
   background-color: ${({ $backgroundColor }) =>
     $backgroundColor || "var(--bg-gray)"};
 
@@ -32,6 +38,17 @@ export const CardContainer = styled.article`
         z-index: 0;
       }
     `}
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+
+  /* 모바일 (화면 너비 768px 이하) */
+  @media (max-width: 768px) {
+    width: 208px;
+    height: 232px;
+    padding: 16px;
+  }
 `;
 
 export const CardContent = styled.div`
@@ -110,13 +127,12 @@ export const Divider = styled.div`
   width: 100%;
   height: 1px;
   background-color: rgb(0, 0, 0);
-  margin-top: 14px;
-
-  ${({ $backgroundImageUrl }) =>
-    $backgroundImageUrl &&
-    css`
-      background-color: rgba(255, 255, 255, 0.85);
-    `}
+  margin-top: 14px
+    ${({ $backgroundImageUrl }) =>
+      $backgroundImageUrl &&
+      css`
+        background-color: rgba(255, 255, 255, 0.85);
+      `};
 `;
 
 export const Footer = styled.footer`
