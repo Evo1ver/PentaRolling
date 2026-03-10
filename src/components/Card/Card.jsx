@@ -6,7 +6,7 @@ import RelationshipBadge from "../RelationshipBadge";
 // 내부 컴포넌트
 const ProfileSection = ({ name, relationship, profileImg }) => (
   <S.ProfileRow>
-    <Avatar src={profileImg} size="56px" />
+    <Avatar src={profileImg} size="medium" />
     <S.ProfileInfo>
       <S.ProfileName>From. {name}</S.ProfileName>
       <RelationshipBadge relationship={relationship} />
