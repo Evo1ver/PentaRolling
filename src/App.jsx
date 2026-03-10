@@ -5,7 +5,6 @@ const App = () => {
     <>
       <Textarea />
     </>
-  );
-};
+
 
 export default App;
