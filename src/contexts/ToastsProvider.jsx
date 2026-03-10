@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import ToastListContainer from "../styles/Toast/ToastListContainer";
 import Toast from "../components/Toast";
 import { ToastsContext } from "./ToastsContext";
-import successIcon from "/src/assets/images/success.svg";
+import successIcon from "/src/assets/icons/success.svg";
 
 export const ToastsContextProvider = ({ children, maxCount = 3 }) => {
   const [toastList, setToastList] = useState([]);
