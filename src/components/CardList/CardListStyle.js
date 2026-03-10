@@ -73,7 +73,7 @@ export const AvatarItem = styled.div`
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid #ffffff;
-  margin-left: -14px;
+  margin-left: -12px;
 `;
 
 export const CountBadge = styled.span`

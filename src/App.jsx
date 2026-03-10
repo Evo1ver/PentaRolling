@@ -1,14 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ListPage from "../pages/ListPage/ListPage";
+import Header from "./components/Header/Header";
+import MainPage from "./pages/MainPage/MainPage";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <>
+      <Header />
       <Routes>
-        <Route path="/" element={<ListPage />} />
-        <Route path="/list" element={<div>리스트 화면</div>} />
+        <Route path="/" element={<MainPage />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 };
 

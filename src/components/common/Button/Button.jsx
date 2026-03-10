@@ -18,6 +18,8 @@ export const Button = ({
   icon = null,
   children,
   onClick,
+  style,
+  className,
 }) => (
   <S.StyledButton
     $variant={variant}
@@ -25,6 +27,8 @@ export const Button = ({
     $state={state}
     disabled={state === "disabled"}
     onClick={onClick}
+    style={style}
+    className={className}
   >
     {icon && (
       <img src={icon} alt="icon" style={{ width: "20px", height: "20px" }} />
