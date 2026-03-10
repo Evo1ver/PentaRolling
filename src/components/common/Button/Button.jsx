@@ -1,10 +1,10 @@
 import { useState } from "react";
 import * as S from "./ButtonStyle";
-import plusIcon from "../../assets/plus.svg";
-import emojiIcon from "../../assets/emoji.svg";
-import arrowRightIcon from "../../assets/arrow_right.svg";
-import arrowLeftIcon from "../../assets/arrow_left.svg";
-import trashIcon from "../../assets/trash.svg";
+import plusIcon from "../../../assets/icons/plus.svg";
+import emojiIcon from "../../../assets/icons/emoji.svg";
+import arrowRightIcon from "../../../assets/icons/arrow_right.svg";
+import arrowLeftIcon from "../../../assets/icons/arrow_left.svg";
+import trashIcon from "../../../assets/icons/trash.svg";
 
 export { emojiIcon, trashIcon };
 
@@ -18,6 +18,8 @@ export const Button = ({
   icon = null,
   children,
   onClick,
+  style,
+  className,
 }) => (
   <S.StyledButton
     $variant={variant}
@@ -25,6 +27,8 @@ export const Button = ({
     $state={state}
     disabled={state === "disabled"}
     onClick={onClick}
+    style={style}
+    className={className}
   >
     {icon && (
       <img src={icon} alt="icon" style={{ width: "20px", height: "20px" }} />
