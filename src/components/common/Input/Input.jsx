@@ -1,4 +1,4 @@
-import * as S from "../styles/InputStyle";
+import * as S from "./InputStyle";
 
 const FROM_PLACEHOLDER = "이름을 입력해 주세요.";
 const TO_PLACEHOLDER = "받는 사람 이름을 입력해 주세요.";
