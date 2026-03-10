@@ -41,3 +41,32 @@ export const ButtonContainer = styled.div`
   margin-top: 40px;
   font-size: 18px;
 `;
+
+export const CardSection = styled.div`
+  position: relative; /* 화살표 버튼들의 기준점이 됩니다! */
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+export const ArrowButtonWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  /* 왼쪽 버튼 위치 */
+  ${(props) =>
+    props.$direction === "left" &&
+    `
+    left: -20px; 
+  `}
+
+  /* 오른쪽 버튼 위치 */
+  ${(props) =>
+    props.$direction === "right" &&
+    `
+    right: -20px;
+  `}
+`;
