@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ToastCloseButton from "../styles/Toast/ToastCloseButton";
 import { ToastContainer, Left } from "../styles/Toast/ToastContainer";
-import closeIcon from "/src/assets/images/close.svg";
+import closeIcon from "/src/assets/icons/close.svg";
 
 const Toast = ({ id, message, duration, closeToast = () => {}, icon }) => {
   useEffect(() => {
