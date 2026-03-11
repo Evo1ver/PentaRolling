@@ -9,6 +9,8 @@ export const CardContainer = styled.article`
   margin-top: 10px;
   margin-bottom: 30px;
 
+  flex-shrink: 0;
+
   border-radius: 24px;
   box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.36);
   cursor: pointer;
@@ -48,6 +50,9 @@ export const CardContainer = styled.article`
     width: 208px;
     height: 232px;
     padding: 16px;
+
+    flex-shrink: 0; /* 카드가 줄어들지 않도록 설정 */
+
   }
 `;
 
