@@ -23,9 +23,11 @@ export const createRollingPaper = async (rollingPaperData) => {
  */
 export const getRollingPaperList = async (limit, offset, sort) => {
   const response = await teamInstance.get(`recipients/`, {
-    limit,
-    offset,
-    sort,
+    params: {
+      limit,
+      offset,
+      sort,
+    },
   });
 
   if (response.status !== 200)

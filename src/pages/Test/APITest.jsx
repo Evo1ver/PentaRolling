@@ -18,7 +18,7 @@ import {
   deleteRollingPaper,
   getRollingPaper,
   getRollingPaperList,
-} from "../../lib/api/rollingpaper";
+} from "../../lib/api/rollingPaper";
 import CardList from "../../components/CardList/CardList";
 
 const APITest = () => {
