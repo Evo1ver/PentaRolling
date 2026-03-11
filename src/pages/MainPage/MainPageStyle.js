@@ -12,6 +12,11 @@ export const MainContainer = styled.main`
   @media (min-width: ${MOBLIE_BREAKPOINT}) {
     margin: 49px 24px;
   }
+
+  @media (min-width: ${TABLET_BREAKPOINT}) {
+    margin: 60px auto;
+    max-width: 1200px;
+  }
 `;
 
 export const FirstSectionContainer = styled.section`
@@ -26,6 +31,14 @@ export const FirstSectionContainer = styled.section`
   @media (min-width: ${MOBLIE_BREAKPOINT}) {
     gap: 36px;
     padding: 40px;
+    border-radius: 16px;
+  }
+
+  @media (min-width: ${TABLET_BREAKPOINT}) {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+    padding: 60px 30px 60px 60px;
     border-radius: 16px;
   }
 `;
@@ -77,6 +90,10 @@ export const Script = styled.p`
 
 export const FirstScriptBr = styled.br`
   display: none;
+
+  @media (min-width: ${TABLET_BREAKPOINT}) {
+    display: block;
+  }
 `;
 
 export const SecondScriptBr = styled.br`
@@ -84,6 +101,10 @@ export const SecondScriptBr = styled.br`
 
   @media (min-width: ${MOBLIE_BREAKPOINT}) {
     display: none;
+  }
+
+  @media (min-width: ${TABLET_BREAKPOINT}) {
+    display: block;
   }
 `;
 
@@ -127,6 +148,13 @@ export const SecondSectionContainer = styled.section`
     gap: 36px;
     padding: 40px;
     border-redius: 16px;
+  }
+
+  @media (min-width: ${TABLET_BREAKPOINT}) {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    padding: 60px 0;
+    gap: 0;
   }
 `;
 export const ButtonWrapper = styled.div`

@@ -30,7 +30,7 @@ const MainPage = () => {
                 서로에게 이모지로 감정을 <S.SecondScriptBr />
                 표현해보세요
               </S.BoldScript>
-              <S.Script>로그인 없이 자유롭게 만들어요.</S.Script>
+              <S.Script>롤링 페이퍼에 이모지를 추가할 수 있어요.</S.Script>
             </S.ScriptContainer>
           </S.PointContainer>
           <S.MainCardImageWrapper>
