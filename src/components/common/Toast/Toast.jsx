@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import ToastCloseButton from "../styles/Toast/ToastCloseButton";
-import { ToastContainer, Left } from "../styles/Toast/ToastContainer";
 import closeIcon from "/src/assets/icons/close.svg";
+import * as S from "./ToastStyle";
 
 const Toast = ({ id, message, duration, closeToast = () => {}, icon }) => {
   useEffect(() => {
@@ -13,15 +12,15 @@ const Toast = ({ id, message, duration, closeToast = () => {}, icon }) => {
   }, [duration, closeToast, id]);
 
   return (
-    <ToastContainer>
-      <Left>
+    <S.ToastContainer>
+      <S.Left>
         <img src={icon} alt="icon" width={24} height={24} />
         {message}
-      </Left>
-      <ToastCloseButton onClick={() => closeToast(id)}>
+      </S.Left>
+      <S.ToastCloseButton onClick={() => closeToast(id)}>
         <img src={closeIcon} alt="close" width={24} height={24} />
-      </ToastCloseButton>
-    </ToastContainer>
+      </S.ToastCloseButton>
+    </S.ToastContainer>
   );
 };
 
