@@ -126,6 +126,7 @@ export const ToggleButtonGroup = ({ options = [], defaultValue, onChange }) => {
         <S.ToggleItem
           key={opt.value}
           type="button"
+          $round={round}
           $isActive={selected === opt.value}
           onClick={() => handleSelect(opt.value)}
         >
