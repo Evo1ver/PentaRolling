@@ -68,7 +68,7 @@ export const deleteMessage = async (messageId) => {
 };
 
 /**
- * 특정 id를 가진 메세지를 생성합니다.
+ * 특정 RollingPaper 내에 메세지를 생성합니다.
  * @param {number} recipientId - 수신자 id
  * @param {object} messageData - 메세지 데이터
  * @returns {object} 메세지 데이터
@@ -76,7 +76,7 @@ export const deleteMessage = async (messageId) => {
 export const createMessage = async (recipientId, messageData) => {
   const response = await teamInstance.post(
     `recipients/${recipientId}/messages/`,
-    { ...messageData },
+    messageData,
   );
 
   if (response.status !== 201)
@@ -86,13 +86,19 @@ export const createMessage = async (recipientId, messageData) => {
 };
 
 /**
- * 특정 id를 가진 메세지 목록을 가져옵니다.
+ * 특정 RollingPaper에 있는 메세지 목록을 가져옵니다.
  * @param {number} recipientId - 수신자 id
  * @returns {object[]} 메세지 데이터
  */
-export const getMessageList = async (recipientId) => {
+export const getMessageList = async (recipientId, limit, offset) => {
   const response = await teamInstance.get(
     `recipients/${recipientId}/messages/`,
+    {
+      params: {
+        limit,
+        offset,
+      },
+    },
   );
 
   if (response.status !== 200)

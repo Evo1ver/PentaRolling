@@ -4,5 +4,5 @@
  * @returns {boolean} emoji면 true, 아니면 false
  */
 export const isEmoji = (char) => {
-  return /[\p{Emoji_Presentation}]/u.test(char) && char.length === 1;
+  return /[\p{Emoji_Presentation}]/u.test(char);
 };
