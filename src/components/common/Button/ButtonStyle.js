@@ -313,5 +313,5 @@ export const ToggleItem = styled.button`
     $isActive ? "var(--white)" : "var(--gray-100)"};
   color: ${({ $isActive }) => ($isActive ? "#2097CA" : "var(--gray-900)")};
   border: ${({ $isActive }) => ($isActive ? "1px solid #2097CA" : "none")};
-  border-radius: ${({ $round }) => ($round ? "8px" : "0")};
+  border-radius: 6px;
 `;
