@@ -27,15 +27,14 @@ const MainPage = () => {
             <S.PointLabel>Point. 02</S.PointLabel>
             <S.ScriptContainer>
               <S.BoldScript>
-                서로에게 이모지로 감정을
-                <S.SecondScriptBr />
+                서로에게 이모지로 감정을 <S.SecondScriptBr />
                 표현해보세요
               </S.BoldScript>
               <S.Script>로그인 없이 자유롭게 만들어요.</S.Script>
             </S.ScriptContainer>
           </S.PointContainer>
           <S.MainCardImageWrapper>
-            <S.MainCardImage src={MainEmojiImage} />
+            <S.MainEmojiImage src={MainEmojiImage} />
           </S.MainCardImageWrapper>
         </S.SecondSectionContainer>
       </S.MainContainer>
