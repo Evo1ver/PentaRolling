@@ -8,7 +8,12 @@ import Avatar from "./Avatar";
  * @param {string} [selectedImage] - 현재 선택된 이미지 URL
  * @param {function} onImageChange - 이미지 선택 시 콜백 (url) => void
  */
-const AvatarSelector = ({ profileImages, selectedImage, onImageChange }) => {
+const AvatarSelector = ({
+  profileImages,
+  selectedImage,
+  onImageChange,
+  size = "medium", 
+}) => {
   const images = profileImages ?? [];
 
   return (
@@ -23,7 +28,7 @@ const AvatarSelector = ({ profileImages, selectedImage, onImageChange }) => {
         >
           <Avatar
             src={imgUrl}
-            size="medium"
+            size={size}
             selected={selectedImage === imgUrl}
           />
         </S.AvatarOption>
