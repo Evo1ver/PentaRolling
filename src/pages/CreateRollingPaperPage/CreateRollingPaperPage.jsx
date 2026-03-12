@@ -9,6 +9,7 @@ import selectedIcon from "../../assets/icons/selected.svg";
 import { useNavigate } from "react-router-dom";
 import { getBackgroundImages } from "../../lib/api/image";
 import { createRollingPaper } from "../../lib/api/rollingPaper";
+import { BACKGROUND_COLORS } from "../../constants/backgroundColors";
 
 const toggleOption = [
   {
@@ -18,25 +19,6 @@ const toggleOption = [
   {
     value: "image",
     label: "이미지",
-  },
-];
-
-const BACKGROUND_COLORS = [
-  {
-    label: "beige",
-    color: "#FFE2AD",
-  },
-  {
-    label: "purple",
-    color: "#ECD9FF",
-  },
-  {
-    label: "blue",
-    color: "#B1E4FF",
-  },
-  {
-    label: "green",
-    color: "#D0F5C3",
   },
 ];
 
