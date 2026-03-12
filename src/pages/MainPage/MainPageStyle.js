@@ -161,5 +161,10 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 51px auto 24px;
+  padding: 0 24px;
   width: 100%;
+
+  @media (min-width: ${TABLET_BREAKPOINT}) {
+    width: 280px;
+  }
 `;

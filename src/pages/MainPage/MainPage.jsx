@@ -39,7 +39,7 @@ const MainPage = () => {
         </S.SecondSectionContainer>
       </S.MainContainer>
       <S.ButtonWrapper>
-        <Button variant="primary" size="large">
+        <Button variant="primary" size="large" style={{ width: "100%" }}>
           롤링 페이퍼 만들기
         </Button>
       </S.ButtonWrapper>
