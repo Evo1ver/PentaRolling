@@ -152,13 +152,15 @@ const CreateRollingPaperPage = () => {
           </S.SelectorContent>
         </div>
 
-        <Button
-          state={!recipient ? "disabled" : "default"}
-          size={56}
-          style={{ width: "100%" }}
-        >
-          생성하기
-        </Button>
+        <S.ButtonContainer>
+          <Button
+            state={!recipient ? "disabled" : "default"}
+            size={56}
+            style={{ width: "100%" }}
+          >
+            생성하기
+          </Button>
+        </S.ButtonContainer>
       </S.Form>
     </>
   );

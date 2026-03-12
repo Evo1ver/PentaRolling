@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MOBILE_BREAKPOINT = "768px"; // 360px 초과 시 적용
+const MOBILE_BREAKPOINT = "768px"; // 768px 이상 시 적용
 
 export const Form = styled.form`
   padding: 50px 20px;
@@ -43,17 +43,42 @@ export const SelectorContent = styled.div`
 `;
 
 export const SelectorFragment = styled.div`
+  position: relative;
   background-color: ${({ $color }) => $color};
-  ${({ $imageURL }) => $imageURL && `background-image: url(${$imageURL})`};
-  ${({ $imageURL }) => $imageURL && `background-size: 100% 100%;`};
   width: 100%;
   height: 150px;
-  border: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
-
-  ${({ $isActive, $imageURL }) => $isActive && $imageURL && `opacity: 0.3`};
+  cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    ${({ $imageURL }) => $imageURL && `background-image: url(${$imageURL});`}
+    background-size: cover;
+    background-position: center;
+    opacity: ${({ $isActive, $imageURL }) =>
+      $isActive && $imageURL ? 0.3 : 1};
+  }
+
+  & > img {
+    position: relative;
+    z-index: 1;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  max-width: 720px;
+  position: fixed;
+  bottom: 0;
+  padding: 20px;
+  z-index: 10;
 `;
