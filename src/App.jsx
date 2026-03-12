@@ -1,11 +1,17 @@
 import CardList from "./components/CardList/CardList";
 
 const App = () => {
-  // Avetar 예시 이미지 URL 배열
   const mockAvatars = [
-    "https://picsum.photos/id/1/200/200",
-    "https://picsum.photos/id/2/200/200",
-    "https://picsum.photos/id/3/200/200",
+    "https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png",
+    "https://picsum.photos/id/522/100/100",
+    "https://picsum.photos/id/547/100/100",
+    "https://picsum.photos/id/268/100/100",
+  ];
+
+  const mockReactions = [
+    { id: 1, emoji: "👍", count: 20 },
+    { id: 2, emoji: "😍", count: 12 },
+    { id: 3, emoji: "😢", count: 7 },
   ];
 
   return (
@@ -20,30 +26,27 @@ const App = () => {
       }}
     >
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        {/* 배경색이 존재할 때*/}
         <CardList
           recipientName="SoWon"
           backgroundColor="green"
           avatarImageUrls={mockAvatars}
-          countBadgeCount={27}
           messageCount={30}
-          goodCount={20}
-          loveCount={12}
-          sadCount={7}
+          reactions={mockReactions}
         />
 
-        {/* 배경 이미지가 존재할 때 */}
         <CardList
           recipientName="Jisoo"
-          backgroundImageUrl="https://picsum.photos/id/28/400/400"
-          avatarImageUrls={mockAvatars.slice(0, 3)}
-          countBadgeCount={5}
+          backgroundImageUrl="https://picsum.photos/id/683/3840/2160"
+          avatarImageUrls={mockAvatars}
           messageCount={7}
-          goodCount={10}
+          reactions={mockReactions}
         />
 
-        {/* 메시지가 0개일 때 안내 문구 */}
-        <CardList recipientName="Daeun" backgroundColor="beige" />
+        <CardList
+          recipientName="Daeun"
+          backgroundColor="beige"
+          messageCount={0}
+        />
       </div>
     </div>
   );
