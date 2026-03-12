@@ -23,6 +23,7 @@ const ProfileAvatar = styled(Avatar)`
 const SendMessage = () => {
   const { recipientId } = useParams();
   const navigate = useNavigate();
+  // 생성된 롤링페이퍼 페이지 구현 후 수정 예정입니다
   const handleSuccess = () => navigate(`/recipients/${recipientId}`);
 
   // 모바일: small(40px), 태블릿 이상: medium(56px)
