@@ -76,7 +76,7 @@ export const AvatarItem = styled.div`
   margin-left: -12px;
 `;
 
-export const CountBadge = styled.span`
+export const ExtraCount = styled.span`
   padding: 6px 8px;
   margin-left: -14px;
   border-radius: 9999px;
