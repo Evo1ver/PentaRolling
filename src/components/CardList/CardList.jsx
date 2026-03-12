@@ -23,15 +23,14 @@ const CardList = ({
   backgroundColor,
   backgroundImageUrl,
   avatarImageUrls = [],
-  countBadgeCount,
+  extraCount,
   messageCount,
   goodCount,
   loveCount,
   sadCount,
   onClick,
 }) => {
-  const showExtraCount =
-    typeof countBadgeCount === "number" && countBadgeCount > 0;
+  const showExtraCount = typeof extraCount === "number" && extraCount > 0;
 
   const firstAvatars = avatarImageUrls.slice(0, 3);
 
@@ -58,7 +57,7 @@ const CardList = ({
                 <Avatar src={url} size="xsmall" />
               </S.AvatarItem>
             ))}
-            {showExtraCount && <S.CountBadge>+{countBadgeCount}</S.CountBadge>}
+            {showExtraCount && <S.CountBadge>+{extraCount}</S.CountBadge>}
           </S.AvatarGroup>
 
           <S.MessageText $backgroundImageUrl={backgroundImageUrl}>
