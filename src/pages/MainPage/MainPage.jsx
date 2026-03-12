@@ -1,10 +1,16 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MainCardImage from "../../assets/images/main-page-card.png";
 import MainEmojiImage from "../../assets/images/main-page-emoji.png";
 import { Button } from "../../components/common/Button/Button";
 import * as S from "./MainPageStyle";
 
 const MainPage = () => {
+  const naviagte = useNavigate();
+
+  const handleButtonClick = () => {
+    naviagte("/list");
+  };
+
   return (
     <>
       <S.MainContainer>
@@ -39,13 +45,16 @@ const MainPage = () => {
           </S.MainCardImageWrapper>
         </S.SecondSectionContainer>
       </S.MainContainer>
-      <Link to="/list">
-        <S.ButtonWrapper>
-          <Button variant="primary" size="large" style={{ width: "100%" }}>
-            구경해보기
-          </Button>
-        </S.ButtonWrapper>
-      </Link>
+      <S.ButtonWrapper>
+        <Button
+          variant="primary"
+          size="large"
+          style={{ width: "100%" }}
+          onClick={handleButtonClick}
+        >
+          구경해보기
+        </Button>
+      </S.ButtonWrapper>
     </>
   );
 };
