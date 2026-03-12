@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Avatar from "../../components/common/Avatar/Avatar";
 
 const TABLET = "768px";
 
@@ -42,13 +41,13 @@ export const ProfileImageRow = styled.div`
   align-items: flex-start;
   gap: 16px;
 
+  & > div:first-child {
+    flex-shrink: 0;
+  }
+
   @media (min-width: ${TABLET}) {
     align-items: center;
   }
-`;
-
-export const ProfileAvatar = styled(Avatar)`
-  flex-shrink: 0;
 `;
 
 export const AvatarSelectorWrapper = styled.div`
@@ -58,6 +57,7 @@ export const AvatarSelectorWrapper = styled.div`
   gap: 8px;
   flex: 1;
 
+  /* AvatarSelectorContainer gap, wrap override */
   & > div {
     flex-wrap: wrap;
     gap: 2px;

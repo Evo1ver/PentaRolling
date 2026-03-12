@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 import Input from "../../components/common/Input/Input";
 import Avatar from "../../components/common/Avatar/Avatar";
@@ -14,6 +15,10 @@ import useMessageForm, {
 } from "../../hooks/useMessageForm";
 
 import * as S from "./SendMessageStyle";
+
+const ProfileAvatar = styled(Avatar)`
+  flex-shrink: 0;
+`;
 
 const SendMessage = () => {
   const { recipientId } = useParams();
@@ -64,7 +69,7 @@ const SendMessage = () => {
         <S.Section>
           <S.SectionTitle>프로필 이미지</S.SectionTitle>
           <S.ProfileImageRow>
-            <Avatar src={form.profileImage} size="large" />
+            <ProfileAvatar src={form.profileImage} size="large" />
             <S.AvatarSelectorWrapper>
               <S.SelectorGuide>프로필 이미지를 선택해주세요!</S.SelectorGuide>
               {isLoadingImages ? (
