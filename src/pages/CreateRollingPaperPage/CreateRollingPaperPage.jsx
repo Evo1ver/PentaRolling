@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../components/common/Input/Input";
 import * as S from "./CreateRollingPaperPageStyle";
 import {
@@ -7,6 +7,7 @@ import {
 } from "../../components/common/Button/Button";
 import selectedIcon from "../../assets/icons/selected.svg";
 import { useNavigate } from "react-router-dom";
+import { getBackgroundImages } from "../../lib/api/image";
 
 const toggleOption = [
   {
@@ -19,24 +20,55 @@ const toggleOption = [
   },
 ];
 
-const BACKGROUND_COLORS = ["#FFE2AD", "#ECD9FF", "#B1E4FF", "#D0F5C3"];
+const BACKGROUND_COLORS = [
+  {
+    label: "beige",
+    color: "#FFE2AD",
+  },
+  {
+    label: "purple",
+    color: "#ECD9FF",
+  },
+  {
+    label: "blue",
+    color: "#B1E4FF",
+  },
+  {
+    label: "green",
+    color: "#D0F5C3",
+  },
+];
 
 const CreateRollingPaperPage = () => {
   const [recipient, setRecipient] = useState("");
   const [inputError, setInputError] = useState(false);
   const [toggle, setToggle] = useState(toggleOption[0].value);
-  const [selectedFragment, setSelectedFragment] = useState(0);
+  const [selectedColor, setSelectedColor] = useState(
+    BACKGROUND_COLORS[0].label,
+  );
+  const [imageList, setImageList] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchBackgroundImages = async () => {
+      try {
+        const images = await getBackgroundImages();
+        setImageList(images);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchBackgroundImages();
+  }, []);
 
   const handleOptionChange = (value) => {
     setToggle(value);
   };
 
-  const handleFragmentClick = (index) => {
-    setSelectedFragment(index);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSubmit = () => {
     // 폼 제출
 
     // 생성 완료 시 생성된 페이지 이동
@@ -68,14 +100,14 @@ const CreateRollingPaperPage = () => {
           <S.SelectorContent>
             {toggle === "color" ? (
               <>
-                {BACKGROUND_COLORS.map((color, index) => (
+                {BACKGROUND_COLORS.map(({ label, color }) => (
                   <S.SelectorFragment
                     key={color}
                     $color={color}
-                    onClick={() => handleFragmentClick(index)}
-                    $isActive={selectedFragment === index}
+                    onClick={() => setSelectedColor(label)}
+                    $isActive={selectedColor === label}
                   >
-                    {index === selectedFragment && (
+                    {label === selectedColor && (
                       <>
                         <img src={selectedIcon} alt="" />
                       </>
@@ -84,7 +116,22 @@ const CreateRollingPaperPage = () => {
                 ))}
               </>
             ) : (
-              <div>이미지</div>
+              <>
+                {imageList.map((imageURL) => (
+                  <S.SelectorFragment
+                    key={imageURL}
+                    $imageURL={imageURL}
+                    onClick={() => setSelectedImage(imageURL)}
+                    $isActive={selectedImage === imageURL}
+                  >
+                    {imageURL === selectedImage && (
+                      <>
+                        <img src={selectedIcon} alt="" />
+                      </>
+                    )}
+                  </S.SelectorFragment>
+                ))}
+              </>
             )}
           </S.SelectorContent>
         </div>
