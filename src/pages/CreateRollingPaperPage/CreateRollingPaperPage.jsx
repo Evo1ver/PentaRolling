@@ -8,6 +8,7 @@ import {
 import selectedIcon from "../../assets/icons/selected.svg";
 import { useNavigate } from "react-router-dom";
 import { getBackgroundImages } from "../../lib/api/image";
+import { createRollingPaper } from "../../lib/api/rollingPaper";
 
 const toggleOption = [
   {
@@ -43,11 +44,11 @@ const CreateRollingPaperPage = () => {
   const [recipient, setRecipient] = useState("");
   const [inputError, setInputError] = useState(false);
   const [toggle, setToggle] = useState(toggleOption[0].value);
-  const [selectedColor, setSelectedColor] = useState(
+  const [backgroundColor, setBackgroundColor] = useState(
     BACKGROUND_COLORS[0].label,
   );
   const [imageList, setImageList] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [backgroundImageURL, setBackgroundImageURL] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -70,9 +71,24 @@ const CreateRollingPaperPage = () => {
     e.preventDefault();
 
     // 폼 제출
+    let formData = {
+      name: recipient,
+      backgroundColor,
+    };
+
+    if (toggle === "image") {
+      formData = {
+        ...formData,
+        backgroundImageURL,
+      };
+    }
+
+    const res = await createRollingPaper(formData);
+
+    console.log(res);
 
     // 생성 완료 시 생성된 페이지 이동
-    navigate(`/post/`);
+    navigate(`/post/${res.id}`);
   };
 
   return (
@@ -104,10 +120,10 @@ const CreateRollingPaperPage = () => {
                   <S.SelectorFragment
                     key={color}
                     $color={color}
-                    onClick={() => setSelectedColor(label)}
-                    $isActive={selectedColor === label}
+                    onClick={() => setBackgroundColor(label)}
+                    $isActive={backgroundColor === label}
                   >
-                    {label === selectedColor && (
+                    {label === backgroundColor && (
                       <>
                         <img src={selectedIcon} alt="" />
                       </>
@@ -121,10 +137,10 @@ const CreateRollingPaperPage = () => {
                   <S.SelectorFragment
                     key={imageURL}
                     $imageURL={imageURL}
-                    onClick={() => setSelectedImage(imageURL)}
-                    $isActive={selectedImage === imageURL}
+                    onClick={() => setBackgroundImageURL(imageURL)}
+                    $isActive={backgroundImageURL === imageURL}
                   >
-                    {imageURL === selectedImage && (
+                    {imageURL === backgroundImageURL && (
                       <>
                         <img src={selectedIcon} alt="" />
                       </>
