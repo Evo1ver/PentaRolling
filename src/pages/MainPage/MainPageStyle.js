@@ -9,11 +9,11 @@ export const MainContainer = styled.main`
   gap: 30px;
   margin: 42px 24px;
 
-  @media (min-width: ${MOBLIE_BREAKPOINT}) {
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
     margin: 49px 24px;
   }
 
-  @media (min-width: ${TABLET_BREAKPOINT}) {
+  @media (width >= ${TABLET_BREAKPOINT}) {
     margin: 60px auto;
     max-width: 1200px;
   }
@@ -28,13 +28,13 @@ export const FirstSectionContainer = styled.section`
   background-color: var(--surface);
   overflow: hidden;
 
-  @media (min-width: ${MOBLIE_BREAKPOINT}) {
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
     gap: 36px;
     padding: 40px;
     border-radius: 16px;
   }
 
-  @media (min-width: ${TABLET_BREAKPOINT}) {
+  @media (width >= ${TABLET_BREAKPOINT}) {
     flex-direction: row;
     justify-content: space-between;
     gap: 0;
@@ -65,7 +65,7 @@ export const ScriptContainer = styled.div`
   flex-direction: column;
   gap: 4px;
 
-  @media (min-width: ${MOBLIE_BREAKPOINT}) {
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
     gap: 8px;
   }
 `;
@@ -74,7 +74,7 @@ export const BoldScript = styled.h2`
   font: var(--font-18-bold);
   color: var(--gray-900);
 
-  @media (min-width: ${MOBLIE_BREAKPOINT}) {
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
     font: var(--font-24-bold);
   }
 `;
@@ -83,7 +83,7 @@ export const Script = styled.p`
   font: var(--font-15-regular);
   color: var(--gray-500);
 
-  @media (min-width: ${MOBLIE_BREAKPOINT}) {
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
     font: var(--font-18-regular);
   }
 `;
@@ -91,7 +91,7 @@ export const Script = styled.p`
 export const FirstScriptBr = styled.br`
   display: none;
 
-  @media (min-width: ${TABLET_BREAKPOINT}) {
+  @media (width >= ${TABLET_BREAKPOINT}) {
     display: block;
   }
 `;
@@ -99,11 +99,11 @@ export const FirstScriptBr = styled.br`
 export const SecondScriptBr = styled.br`
   display: block;
 
-  @media (min-width: ${MOBLIE_BREAKPOINT}) {
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
     display: none;
   }
 
-  @media (min-width: ${TABLET_BREAKPOINT}) {
+  @media (width >= ${TABLET_BREAKPOINT}) {
     display: block;
   }
 `;
@@ -119,7 +119,7 @@ export const MainCardImage = styled.img`
   height: 100px;
   flex: 0 0 auto;
 
-  @media (min-width: ${MOBLIE_BREAKPOINT}) {
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
     width: 740px;
     height: 210px;
   }
@@ -129,7 +129,7 @@ export const MainEmojiImage = styled.img`
   width: 360px;
   height: 113px;
 
-  @media (min-width: ${MOBLIE_BREAKPOINT}) {
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
     width: 720px;
     height: 210px;
   }
@@ -144,13 +144,13 @@ export const SecondSectionContainer = styled.section`
   background-color: var(--surface);
   overflow: hidden;
 
-  @media (min-width: ${MOBLIE_BREAKPOINT}) {
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
     gap: 36px;
     padding: 40px;
     border-redius: 16px;
   }
 
-  @media (min-width: ${TABLET_BREAKPOINT}) {
+  @media (width >= ${TABLET_BREAKPOINT}) {
     flex-direction: row-reverse;
     justify-content: flex-end;
     padding: 60px 0;
@@ -164,7 +164,7 @@ export const ButtonWrapper = styled.div`
   padding: 0 24px;
   width: 100%;
 
-  @media (min-width: ${TABLET_BREAKPOINT}) {
+  @media (width >= ${TABLET_BREAKPOINT}) {
     width: 280px;
   }
 `;
