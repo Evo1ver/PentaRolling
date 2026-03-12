@@ -45,7 +45,7 @@ export const EditorContainer = styled.div`
   }
 
   // 모바일 반응형 css
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     width: 320px;
     height: 260px;
 
