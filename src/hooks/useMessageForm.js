@@ -3,22 +3,11 @@ import { createMessage } from "../lib/api/message";
 import { getProfileImages } from "../lib/api/image";
 import { getRollingPaper } from "../lib/api/rollingPaper";
 import useToast from "./useToast";
-
-export const RELATIONSHIP_OPTIONS = [
-  { id: 1, value: "지인" },
-  { id: 2, value: "친구" },
-  { id: 3, value: "동료" },
-  { id: 4, value: "가족" },
-];
-
-export const FONT_OPTIONS = [
-  { id: 1, value: "Noto Sans" },
-  { id: 2, value: "Pretendard" },
-  { id: 3, value: "나눔명조" },
-  { id: 4, value: "나눔손글씨 손편지체" },
-];
+import FONTS from "../constants/fonts";
+import RELATIONS from "../constants/relations";
 
 const BACKGROUND_COLOR_MAP = {
+  //수정 예정입니다
   beige: "#FAE4B2",
   purple: "#EDD1FF",
   blue: "#B1D0FF",
@@ -28,9 +17,9 @@ const BACKGROUND_COLOR_MAP = {
 const INITIAL_FORM = {
   from: "",
   profileImage: "",
-  relationship: RELATIONSHIP_OPTIONS[0].value,
+  relationship: RELATIONS[0].value,
   content: "",
-  font: FONT_OPTIONS[0].value,
+  font: FONTS[0].value,
 };
 
 const INITIAL_ERRORS = {
@@ -66,7 +55,7 @@ const useMessageForm = (recipientId, onSuccess) => {
       try {
         const data = await getRollingPaper(recipientId);
         setBackgroundColor(
-          BACKGROUND_COLOR_MAP[data.backgroundColor] ?? "#FFFFFF",
+          BACKGROUND_COLOR_MAP[data.backgroundColor] ?? "#FFFFFF"
         );
       } catch {
         setBackgroundColor("#FFFFFF");

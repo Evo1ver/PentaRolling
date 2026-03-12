@@ -9,10 +9,9 @@ import { Dropdown } from "../../components/common/Dropdown/Dropdown";
 import Textarea from "../../components/common/Textarea/Textarea";
 import { Button } from "../../components/common/Button/Button";
 
-import useMessageForm, {
-  RELATIONSHIP_OPTIONS,
-  FONT_OPTIONS,
-} from "../../hooks/useMessageForm";
+import useMessageForm from "../../hooks/useMessageForm";
+import FONTS from "../../constants/fonts";
+import RELATIONS from "../../constants/relations";
 
 import * as S from "./SendMessageStyle";
 
@@ -90,7 +89,7 @@ const SendMessage = () => {
         <S.Section>
           <S.SectionTitle>상대와의 관계</S.SectionTitle>
           <Dropdown
-            type={RELATIONSHIP_OPTIONS}
+            type={RELATIONS}
             value={form.relationship}
             onChange={handleRelationshipChange}
           />
@@ -104,7 +103,7 @@ const SendMessage = () => {
         <S.Section>
           <S.SectionTitle>폰트 선택</S.SectionTitle>
           <Dropdown
-            type={FONT_OPTIONS}
+            type={FONTS}
             value={form.font}
             onChange={handleFontChange}
           />
