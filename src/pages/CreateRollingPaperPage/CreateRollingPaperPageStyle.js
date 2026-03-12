@@ -32,6 +32,10 @@ export const SelectorLabel = styled.div`
   margin-bottom: 4px;
 `;
 
+export const ToggleWrapper = styled.div`
+  margin-bottom: 40px;
+`;
+
 export const SelectorContent = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);

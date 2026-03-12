@@ -9,7 +9,7 @@ import selectedIcon from "../../assets/icons/selected.svg";
 import { useNavigate } from "react-router-dom";
 import { getBackgroundImages } from "../../lib/api/image";
 import { createRollingPaper } from "../../lib/api/rollingPaper";
-import { BACKGROUND_COLORS } from "../../constants/backgroundColors";
+import BACKGROUND_COLORS from "../../constants/backgroundColors";
 
 const toggleOption = [
   {
@@ -65,12 +65,13 @@ const CreateRollingPaperPage = () => {
       };
     }
 
-    const res = await createRollingPaper(formData);
-
-    console.log(res);
-
-    // 생성 완료 시 생성된 페이지 이동
-    navigate(`/post/${res.id}`);
+    try {
+      const res = await createRollingPaper(formData);
+      // 생성 완료 시 생성된 페이지 이동
+      navigate(`/post/${res.id}`);
+    } catch (error) {
+      console.error("롤링페이퍼 생성 실패:", error);
+    }
   };
 
   return (
@@ -89,12 +90,12 @@ const CreateRollingPaperPage = () => {
             <S.SelectorLabel>배경화면을 선택해 주세요.</S.SelectorLabel>
             컬러를 선택하거나 이미지를 선택할 수 있습니다.
           </S.SelectorDescription>
-          <div style={{ marginBottom: "40px" }}>
+          <S.ToggleWrapper>
             <ToggleButtonGroup
               options={toggleOption}
               onChange={handleOptionChange}
             />
-          </div>
+          </S.ToggleWrapper>
           <S.SelectorContent>
             {toggle === "color" ? (
               <>
@@ -106,9 +107,7 @@ const CreateRollingPaperPage = () => {
                     $isActive={backgroundColor === label}
                   >
                     {label === backgroundColor && (
-                      <>
-                        <img src={selectedIcon} alt="" />
-                      </>
+                      <img src={selectedIcon} alt="선택됨" />
                     )}
                   </S.SelectorFragment>
                 ))}
@@ -123,9 +122,7 @@ const CreateRollingPaperPage = () => {
                     $isActive={backgroundImageURL === imageURL}
                   >
                     {imageURL === backgroundImageURL && (
-                      <>
-                        <img src={selectedIcon} alt="" />
-                      </>
+                      <img src={selectedIcon} alt="선택됨" />
                     )}
                   </S.SelectorFragment>
                 ))}
