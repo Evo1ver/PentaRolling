@@ -39,10 +39,12 @@ const Options = styled.li`
   position: absolute;
   top: 58px;
   left: 0px;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   padding: 10px 0;
   width: 100%;
+  background-color: var(--white);
   border: 1px solid var(--gray-300);
   border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);

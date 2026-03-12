@@ -36,9 +36,9 @@
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
-      "node ./node_modules/prettier/bin/prettier.cjs --write",
-      "node ./node_modules/eslint/bin/eslint.js --fix"
+      "prettier --write",
+      "eslint --fix"
     ],
-    "**/*.{css,md,json,yaml}": "node ./node_modules/prettier/bin/prettier.cjs --write"
+    "**/*.{css,md,json,yaml}": "prettier --write"
   }
 }

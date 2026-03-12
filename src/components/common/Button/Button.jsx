@@ -1,12 +1,10 @@
 import { useState } from "react";
 import * as S from "./ButtonStyle";
-import plusIcon from "../../../assets/icons/plus.svg";
-import emojiIcon from "../../../assets/icons/emoji.svg";
-import arrowRightIcon from "../../../assets/icons/arrow_right.svg";
-import arrowLeftIcon from "../../../assets/icons/arrow_left.svg";
-import trashIcon from "../../../assets/icons/trash.svg";
-
-export { emojiIcon, trashIcon };
+import plusIcon from "/src/assets/icons/plus.svg";
+import emojiIcon from "/src/assets/icons/emoji.svg";
+import arrowRightIcon from "/src/assets/icons/arrow_right.svg";
+import arrowLeftIcon from "/src/assets/icons/arrow_left.svg";
+import trashIcon from "/src/assets/icons/trash.svg";
 
 // Button
 // variant: "primary" | "secondary" | "outlined"
@@ -125,6 +123,7 @@ export const ToggleButtonGroup = ({ options = [], defaultValue, onChange }) => {
       {options.map((opt) => (
         <S.ToggleItem
           key={opt.value}
+          type="button"
           $isActive={selected === opt.value}
           onClick={() => handleSelect(opt.value)}
         >
