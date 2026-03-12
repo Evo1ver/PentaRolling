@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MainCardImage from "../../assets/images/main-page-card.png";
 import MainEmojiImage from "../../assets/images/main-page-emoji.png";
 import { Button } from "../../components/common/Button/Button";
@@ -38,11 +39,13 @@ const MainPage = () => {
           </S.MainCardImageWrapper>
         </S.SecondSectionContainer>
       </S.MainContainer>
-      <S.ButtonWrapper>
-        <Button variant="primary" size="large" style={{ width: "100%" }}>
-          롤링 페이퍼 만들기
-        </Button>
-      </S.ButtonWrapper>
+      <Link to="/list">
+        <S.ButtonWrapper>
+          <Button variant="primary" size="large" style={{ width: "100%" }}>
+            구경해보기
+          </Button>
+        </S.ButtonWrapper>
+      </Link>
     </>
   );
 };
