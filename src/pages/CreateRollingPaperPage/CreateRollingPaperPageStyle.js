@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MOBILE_BREAKPOINT = "768px"; // 768px 이상 시 적용
+const TABLET_BREAKPOINT = "768px"; // 768px 이상 시 적용
 
 export const Form = styled.form`
   padding: 50px 20px;
@@ -14,7 +14,7 @@ export const Form = styled.form`
     width: 100%;
   }
 
-  @media (min-width: ${MOBILE_BREAKPOINT}) {
+  @media (min-width: ${TABLET_BREAKPOINT}) {
     width: 720px;
     margin: 0 auto;
   }
@@ -38,11 +38,11 @@ export const ToggleWrapper = styled.div`
 
 export const SelectorContent = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 
-  @media (max-width: ${MOBILE_BREAKPOINT}) {
-    grid-template-columns: repeat(2, 1fr);
+  @media (min-width: ${TABLET_BREAKPOINT}) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
