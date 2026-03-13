@@ -1,7 +1,7 @@
 import * as S from "./CardStyle";
 import Avatar from "../common/Avatar/Avatar";
 import { DeleteIconButton, PlusButton } from "../common/Button/Button";
-import RelationshipBadge from "../RelationshipBadge";
+import RelationshipBadge from "../common/RelationshipBadge/RelationshipBadge";
 
 // 내부 컴포넌트
 const ProfileSection = ({ name, relationship, profileImg }) => (

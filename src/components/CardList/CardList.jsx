@@ -1,5 +1,5 @@
 import Avatar from "../common/Avatar/Avatar";
-import EmojiBadge from "../common/Badge/EmojiBadge";
+import EmojiBadge from "../common/EmojiBadge/EmojiBadge";
 import * as S from "./CardListStyle";
 
 /**

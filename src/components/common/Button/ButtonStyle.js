@@ -284,10 +284,13 @@ export const ArrowButton = styled.button`
   ${baseButtonCss}
   width: 40px;
   height: 40px;
-  border-radius: 0;
-  background: transparent;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--gray-300);
   color: var(--gray-900);
   padding: 0;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
 
   &:disabled {
     color: var(--gray-300);
@@ -313,5 +316,5 @@ export const ToggleItem = styled.button`
     $isActive ? "var(--white)" : "var(--gray-100)"};
   color: ${({ $isActive }) => ($isActive ? "#2097CA" : "var(--gray-900)")};
   border: ${({ $isActive }) => ($isActive ? "1px solid #2097CA" : "none")};
-  border-radius: 0;
+  border-radius: 6px;
 `;
