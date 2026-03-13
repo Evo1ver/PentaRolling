@@ -6,12 +6,6 @@ import { baseInstance } from "./axios";
  */
 export const getBackgroundImages = async () => {
   const response = await baseInstance.get("background-images/");
-
-  if (response.status !== 200)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
-  if (!response.data.imageUrls) throw new Error("No imageUrls in response");
-
   return response.data.imageUrls;
 };
 
@@ -21,11 +15,5 @@ export const getBackgroundImages = async () => {
  */
 export const getProfileImages = async () => {
   const response = await baseInstance.get("profile-images/");
-
-  if (response.status !== 200)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
-  if (!response.data.imageUrls) throw new Error("No imageUrls in response");
-
   return response.data.imageUrls;
 };

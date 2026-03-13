@@ -26,8 +26,8 @@ const APITest = () => {
   const [rpDatas, setRpDatas] = useState([]);
 
   // const TeamId = "23-2";
-  const RecipientId = 16557;
-  const MessageId = 32798;
+  const RecipientId = 16771;
+  const MessageId = 33109;
 
   const handleCreateClick = async () => {
     const datas = await createMessage(RecipientId, {
@@ -58,7 +58,7 @@ const APITest = () => {
   };
 
   const handleAddReactionClick = async (id) => {
-    const data = await addReaction(id, "😍"); // 👍😍😢
+    const data = await addReaction(id, "👍"); // 👍😍😢
     console.log(data);
   };
 
@@ -89,7 +89,7 @@ const APITest = () => {
   };
 
   const handleDeleteRollingPaperClick = async () => {
-    await deleteRollingPaper(16715);
+    await deleteRollingPaper(16780);
   };
 
   return (

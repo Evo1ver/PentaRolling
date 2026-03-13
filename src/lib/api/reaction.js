@@ -18,10 +18,6 @@ export const getReactions = async (recipientId, limit, offset) => {
       },
     },
   );
-
-  if (response.status !== 200)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
 
@@ -40,10 +36,6 @@ export const addReaction = async (recipientId, emoji) => {
       type: "increase",
     },
   );
-
-  if (response.status !== 201)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
 
@@ -62,9 +54,5 @@ export const removeReaction = async (recipientId, emoji) => {
       type: "decrease",
     },
   );
-
-  if (response.status !== 201)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };

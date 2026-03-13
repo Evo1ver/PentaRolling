@@ -47,6 +47,12 @@ const CreateRollingPaperPage = () => {
 
   const handleOptionChange = (value) => {
     setToggle(value);
+    // 탭 전환 시 반대편 선택 상태 초기화 (상호 배타적 선택 보장)
+    if (value === "image") {
+      setBackgroundColor(BACKGROUND_COLORS[0].label);
+    } else {
+      setBackgroundImageURL(null);
+    }
   };
 
   const handleSubmit = async (e) => {
