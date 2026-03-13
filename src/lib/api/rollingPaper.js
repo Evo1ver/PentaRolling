@@ -7,10 +7,6 @@ import { teamInstance } from "./axios";
  */
 export const createRollingPaper = async (rollingPaperData) => {
   const response = await teamInstance.post(`recipients/`, rollingPaperData);
-
-  if (response.status !== 201)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
 
@@ -29,10 +25,6 @@ export const getRollingPaperList = async (limit, offset, sort) => {
       sort,
     },
   });
-
-  if (response.status !== 200)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
 
@@ -43,10 +35,6 @@ export const getRollingPaperList = async (limit, offset, sort) => {
  */
 export const getRollingPaper = async (recipientId) => {
   const response = await teamInstance.get(`recipients/${recipientId}/`);
-
-  if (response.status !== 200)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
 
@@ -57,9 +45,5 @@ export const getRollingPaper = async (recipientId) => {
  */
 export const deleteRollingPaper = async (rollingPaperId) => {
   const response = await teamInstance.delete(`recipients/${rollingPaperId}/`);
-
-  if (response.status !== 204)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };

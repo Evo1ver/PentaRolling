@@ -78,10 +78,6 @@ export const createMessage = async (recipientId, messageData) => {
     `recipients/${recipientId}/messages/`,
     messageData,
   );
-
-  if (response.status !== 201)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
 
@@ -100,9 +96,5 @@ export const getMessageList = async (recipientId, limit, offset) => {
       },
     },
   );
-
-  if (response.status !== 200)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
