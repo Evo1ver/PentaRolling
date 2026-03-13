@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import { Button } from "../common/Button/Button";
 
-const HeaderContainer = styled.div`
+const MOBLIE_BREAKPOINT = "361px";
+
+export const HeaderContainer = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
@@ -13,7 +16,7 @@ const HeaderContainer = styled.div`
     rgba(100, 100, 100, 1) 100%
   );
 `;
-const HeaderContents = styled.div`
+export const HeaderContents = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,9 +26,18 @@ const HeaderContents = styled.div`
   margin: 0 auto;
 `;
 
-const Logo = styled.img`
+export const Logo = styled.img`
   width: 167px;
   height: 30px;
 `;
 
-export { HeaderContainer, HeaderContents, Logo };
+export const HeaderButton = styled(Button)`
+  width: 138px;
+  height: 40px;
+  font: var(--font-14-bold);
+
+  @media (width >= ${MOBLIE_BREAKPOINT}) {
+    width: 152px;
+    font: var(--font-16-bold);
+  }
+`;

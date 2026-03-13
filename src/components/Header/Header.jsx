@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
-import { Button } from "../common/Button/Button";
 import * as S from "./HeaderStyle";
 
 const Header = () => {
@@ -15,9 +14,9 @@ const Header = () => {
         </Link>
         {shouldShowButton && (
           <Link to="/post">
-            <Button variant="outlined" size="small">
+            <S.HeaderButton variant="outlined" size="small">
               롤링 페이퍼 만들기
-            </Button>
+            </S.HeaderButton>
           </Link>
         )}
       </S.HeaderContents>
