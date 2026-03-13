@@ -3,6 +3,7 @@ import styled from "styled-components";
 const TABLET_BREAKPOINT = "768px"; // 768px 이상 시 적용
 
 export const Form = styled.form`
+  margin-top: 64px;
   padding: 50px 20px;
   display: flex;
   flex-direction: column;
@@ -16,7 +17,7 @@ export const Form = styled.form`
 
   @media (min-width: ${TABLET_BREAKPOINT}) {
     width: 720px;
-    margin: 0 auto;
+    margin: 64px auto 0;
   }
 `;
 

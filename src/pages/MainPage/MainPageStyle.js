@@ -7,14 +7,14 @@ export const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  margin: 42px 24px;
+  margin: 106px 24px 42px;
 
   @media (width >= ${MOBLIE_BREAKPOINT}) {
-    margin: 49px 24px;
+    margin: 114px 24px 50px;
   }
 
   @media (width >= ${TABLET_BREAKPOINT}) {
-    margin: 60px auto;
+    margin: 124px auto 60px;
     max-width: 1200px;
   }
 `;
