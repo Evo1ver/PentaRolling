@@ -20,10 +20,9 @@ const ProfileAvatar = styled(Avatar)`
 `;
 
 const SendMessage = () => {
-  const { recipientId } = useParams();
+  const { id: recipientId } = useParams();
   const navigate = useNavigate();
-  // 생성된 롤링페이퍼 페이지 구현 후 수정 예정입니다
-  const handleSuccess = () => navigate(`/recipients/${recipientId}`);
+  const handleSuccess = () => navigate(`/post/${recipientId}`);
 
   // 모바일: small(40px), 태블릿 이상: medium(56px)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);

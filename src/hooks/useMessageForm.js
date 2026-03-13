@@ -5,21 +5,21 @@ import { getRollingPaper } from "../lib/api/rollingPaper";
 import useToast from "./useToast";
 import FONTS from "../constants/fonts";
 import RELATIONS from "../constants/relations";
+import BACKGROUND_COLORS from "../constants/backgroundColors";
 
-const BACKGROUND_COLOR_MAP = {
-  //수정 예정입니다
-  beige: "#FAE4B2",
-  purple: "#EDD1FF",
-  blue: "#B1D0FF",
-  green: "#D0F5C3",
-};
+const DEFAULT_AVATAR_URL =
+  "https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png";
+
+const BG_COLOR_MAP = Object.fromEntries(
+  BACKGROUND_COLORS.map(({ label, color }) => [label, color]),
+);
 
 const INITIAL_FORM = {
   from: "",
-  profileImage: "",
-  relationship: RELATIONS[0].value,
+  profileImage: DEFAULT_AVATAR_URL, // 기본 이미지 설정
+  relationship: RELATIONS[0].value, // 기본값: "지인"
   content: "",
-  font: FONTS[0].value,
+  font: FONTS[0].value, // 기본값: "Noto Sans"
 };
 
 const INITIAL_ERRORS = {
@@ -35,6 +35,7 @@ const useMessageForm = (recipientId, onSuccess) => {
   const [isLoadingImages, setIsLoadingImages] = useState(true);
   const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
 
+  // 프로필 이미지 목록 fetch
   useEffect(() => {
     const fetchProfileImages = async () => {
       try {
@@ -46,24 +47,23 @@ const useMessageForm = (recipientId, onSuccess) => {
         setIsLoadingImages(false);
       }
     };
-
     fetchProfileImages();
   }, []);
 
+  // 롤링페이퍼 배경색 fetch
   useEffect(() => {
     const fetchBackgroundColor = async () => {
       try {
         const data = await getRollingPaper(recipientId);
-        setBackgroundColor(
-          BACKGROUND_COLOR_MAP[data.backgroundColor] ?? "#FFFFFF"
-        );
+        setBackgroundColor(BG_COLOR_MAP[data.backgroundColor] ?? "#FFFFFF");
       } catch {
         setBackgroundColor("#FFFFFF");
       }
     };
-
     fetchBackgroundColor();
   }, [recipientId]);
+
+  // 핸들러
 
   const handleFromChange = (e) => {
     setForm((prev) => ({ ...prev, from: e.target.value }));
@@ -72,12 +72,14 @@ const useMessageForm = (recipientId, onSuccess) => {
     }
   };
 
+  // focus out 시 빈 값이면 에러 표시
   const handleFromBlur = () => {
     setErrors((prev) => ({ ...prev, from: form.from.trim() === "" }));
   };
 
+  // 이미지 선택 시: 선택 안 하면 기본 이미지 유지
   const handleImageChange = (url) => {
-    setForm((prev) => ({ ...prev, profileImage: url }));
+    setForm((prev) => ({ ...prev, profileImage: url || DEFAULT_AVATAR_URL }));
   };
 
   const handleRelationshipChange = (value) => {
@@ -92,15 +94,27 @@ const useMessageForm = (recipientId, onSuccess) => {
     setForm((prev) => ({ ...prev, font: value }));
   };
 
-  const isSubmitDisabled =
-    form.from.trim() === "" ||
-    new DOMParser()
-      .parseFromString(form.content, "text/html")
-      .body.textContent.trim() === "" ||
-    isSubmitting;
+  // 유효성
 
+  // ReactQuill HTML에서 순수 텍스트 추출
+  const getPlainText = (html) => {
+    if (!html) return "";
+    // DOMParser로 HTML 파싱 후 텍스트만 추출
+    const text = new DOMParser()
+      .parseFromString(html, "text/html")
+      .body.textContent.trim();
+    return text;
+  };
+
+  const isFromFilled = form.from.trim() !== "";
+  const isContentFilled = getPlainText(form.content) !== "";
+
+  // From과 content 모두 있을 때 활성화
+  const isSubmitDisabled = !isFromFilled || !isContentFilled || isSubmitting;
+
+  // 제출
   const handleSubmit = async () => {
-    if (form.from.trim() === "") {
+    if (!isFromFilled) {
       setErrors((prev) => ({ ...prev, from: true }));
       return;
     }
