@@ -10,6 +10,7 @@ import Textarea from "../../components/common/Textarea/Textarea";
 import { Button } from "../../components/common/Button/Button";
 
 import useMessageForm from "../../hooks/useMessageForm";
+import useRollingPaperData from "../../hooks/useRollingPaperData";
 import FONTS from "../../constants/fonts";
 import RELATIONS from "../../constants/relations";
 
@@ -24,23 +25,19 @@ const SendMessage = () => {
   const navigate = useNavigate();
   const handleSuccess = () => navigate(`/post/${recipientId}`);
 
-  // 모바일: small(40px), 태블릿 이상: medium(56px)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const { profileImages, isLoadingImages, backgroundColor } =
+    useRollingPaperData(recipientId);
+
   const {
     form,
     errors,
-    profileImages,
-    isLoadingImages,
-    backgroundColor,
     isSubmitting,
     isSubmitDisabled,
     handleFromChange,
@@ -109,7 +106,7 @@ const SendMessage = () => {
         </S.Section>
       </S.FormContainer>
 
-      <S.SubmitBar>
+      <S.SubmitBar $backgroundColor={backgroundColor}>
         <Button
           variant="primary"
           size="large"

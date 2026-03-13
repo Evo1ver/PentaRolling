@@ -90,7 +90,8 @@ export const SubmitBar = styled.footer`
   left: 0;
   right: 0;
   padding: 16px 20px;
-  background-color: var(--white);
+  background-color: ${({ $backgroundColor }) =>
+    $backgroundColor ?? "var(--white)"};
   border-top: 1px solid var(--gray-200);
 
   button {
