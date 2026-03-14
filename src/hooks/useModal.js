@@ -8,12 +8,13 @@ import ModalContext from "../contexts/ModalContext";
  */
 const useModal = () => {
   const modalContext = useContext(ModalContext);
+  const { isOpen, openModal, closeModal } = modalContext;
 
   if (!modalContext) {
     throw new Error("Modal Context를 찾을 수 없습니다");
   }
 
-  return modalContext;
+  return { isOpen, openModal, closeModal };
 };
 
 export default useModal;

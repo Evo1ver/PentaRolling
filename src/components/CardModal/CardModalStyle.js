@@ -8,7 +8,6 @@ export const Layout = styled.div`
   padding: 40px;
   font-family: ${({ $fonts }) => $fonts};
   width: 600px;
-  height: 476px;
 `;
 
 export const Header = styled.div`
@@ -41,17 +40,11 @@ export const Date = styled.div`
   align-content: center;
 `;
 
-// 다른 브라우저에서 테스트 필요
-export const Content = styled.div`
-  font: var(--font-18-regular);
-  overflow-y: auto;
-  padding-right: 16px;
-`;
-
 export const Footer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: auto;
 `;
 export const WideButton = styled(Button)`
   width: 300px;
