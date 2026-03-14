@@ -430,7 +430,11 @@ const PostMessage = () => {
                 content={parseContent(msg.content)}
                 date={formatDate(msg.createdAt)}
               />
-              <S.CardClickOverlay onClick={() => setSelectedMsg(msg)} />
+              <S.CardClickOverlay
+                onClick={() => {
+                  if (window.innerWidth >= 768) setSelectedMsg(msg);
+                }}
+              />
             </S.CardWrapper>
           ))}
         </S.CardGrid>
