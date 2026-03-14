@@ -1,19 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import useMediaquery from "../../hooks/useMediaQuery";
 import Logo from "../../assets/images/logo.png";
 import * as S from "./HeaderStyle";
 
 const Header = () => {
   const { pathname } = useLocation();
-
-  const isMobile = useMediaquery("(width <= 360px)");
-
-  const shouldShowHeader =
-    !isMobile || pathname === "/" || pathname === "/list";
-
-  if (!shouldShowHeader) {
-    return null;
-  }
 
   const shouldShowButton = pathname === "/" || pathname === "/list";
 

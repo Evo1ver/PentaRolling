@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const TABLET_BREAKPOINT = "768px"; // 768px 이상 시 적용
-const MOBILE_BREAKPOINT = "360px";
 
 export const Form = styled.form`
   padding: 50px 20px;
@@ -13,10 +12,6 @@ export const Form = styled.form`
 
   & > div {
     width: 100%;
-  }
-
-  @media (min-width: ${MOBILE_BREAKPOINT}) {
-    margin-top: 64px;
   }
 
   @media (min-width: ${TABLET_BREAKPOINT}) {
