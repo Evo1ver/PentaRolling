@@ -20,10 +20,15 @@ import {
   getRollingPaperList,
 } from "../../lib/api/rollingPaper";
 import CardList from "../../components/CardList/CardList";
+import useModal from "../../hooks/useModal";
+import CardModal from "../../components/CardModal/CardModal";
+import Textarea from "../../components/common/Textarea/Textarea";
 
 const APITest = () => {
   const [datas, setDatas] = useState([]);
   const [rpDatas, setRpDatas] = useState([]);
+  const [content, setContent] = useState("");
+  const { openModal, closeModal } = useModal();
 
   // const TeamId = "23-2";
   const RecipientId = 16771;
@@ -39,6 +44,23 @@ const APITest = () => {
       font: FONTS[1].value, // 배열의 2번째 원소 => "Pretendard"
     });
     console.log(datas);
+  };
+
+  const handleContentChange = (value) => {
+    setContent(value);
+  };
+
+  const handleOpenModalClick = () => {
+    openModal(
+      <CardModal
+        name="asdf"
+        profileImg="https://fastly.picsum.photos/id/794/200/200.jpg?hmac=qNLJvkiBmg4TyCSCwU__daf9sb5La0_1eRzJewRgIyU"
+        content={content}
+        createdDate={formatDate(new Date())}
+        relationship="친구"
+        onCloseModal={closeModal}
+      />,
+    );
   };
 
   const handleGetListClick = async () => {
@@ -142,6 +164,7 @@ const APITest = () => {
         <button onClick={() => handleDeleteRollingPaperClick()}>
           롤링 페이퍼 삭제
         </button>
+        <button onClick={handleOpenModalClick}>모달 열기</button>
       </div>
       <div style={{ display: "flex", overflowX: "auto", gap: "1rem" }}>
         {rpDatas?.map((data) => (
@@ -154,6 +177,7 @@ const APITest = () => {
           />
         ))}
       </div>
+      <Textarea value={content} onChange={handleContentChange} />
     </div>
   );
 };

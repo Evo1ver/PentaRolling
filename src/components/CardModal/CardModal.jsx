@@ -4,6 +4,7 @@ import Avatar from "../common/Avatar/Avatar";
 import { Button } from "../common/Button/Button";
 import RelationshipBadge from "../common/RelationshipBadge/RelationshipBadge";
 import * as S from "./CardModalStyle";
+import ReactQuill from "react-quill-new";
 
 /**
  * @param {string} name 작성자 이름
@@ -39,7 +40,15 @@ const CardModal = ({
           </S.Left>
           <S.Date>{createdDate}</S.Date>
         </S.Header>
-        <S.Content>{content}</S.Content>
+        <ReactQuill
+          value={content}
+          readOnly
+          theme="snow"
+          modules={{
+            toolbar: false,
+          }}
+          style={{ height: "240px", overflowY: "auto" }}
+        />
         <S.Footer>
           <Button
             style={{ width: "120px" }}
