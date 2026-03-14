@@ -4,7 +4,7 @@ import styled from "styled-components";
 // 공통 Base
 // ─────────────────────────────────────────────
 const BaseCardWrapper = styled.div`
-  width: 384px;
+  width: 100%;
   height: 280px;
   border-radius: 16px;
   background: var(--white);
@@ -63,7 +63,7 @@ export const CardHeader = styled.div`
   height: 42px;
   border-bottom: 1px solid var(--black);
   border-radius: 16px 16px 0 0;
-  background: #D9D9D9;
+  background: #d9d9d9;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -71,8 +71,8 @@ export const CardHeader = styled.div`
   flex-shrink: 0;
 
   button {
-    background: #D9D9D9;
-    border-color: #D9D9D9;
+    background: #d9d9d9;
+    border-color: #d9d9d9;
   }
 `;
 

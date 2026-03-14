@@ -1,7 +1,7 @@
 import * as S from "./CardStyle";
 import Avatar from "../common/Avatar/Avatar";
 import { DeleteIconButton, PlusButton } from "../common/Button/Button";
-import RelationshipBadge from "../RelationshipBadge";
+import RelationshipBadge from "../common/RelationshipBadge/RelationshipBadge";
 
 // 내부 컴포넌트
 const ProfileSection = ({ name, relationship, profileImg }) => (
@@ -40,7 +40,7 @@ export const MiniCard = ({
       />
       {showDeleteButton && <DeleteIconButton size={36} onClick={onDelete} />}
     </S.MiniCardHeader>
-    <S.CardContent>{content}</S.CardContent>
+    <S.CardContent dangerouslySetInnerHTML={{ __html: content }} />
     <S.CardDate>{date}</S.CardDate>
   </S.MiniCardWrapper>
 );
@@ -70,7 +70,7 @@ export const NormalCard = ({
         relationship={relationship}
         profileImg={profileImg}
       />
-      <S.CardContent>{content}</S.CardContent>
+      <S.CardContent dangerouslySetInnerHTML={{ __html: content }} />
       <S.CardDate>{date}</S.CardDate>
     </S.CardBody>
   </S.CardWrapper>
