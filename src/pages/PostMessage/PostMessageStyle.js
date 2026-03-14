@@ -288,6 +288,7 @@ export const ContentArea = styled.main`
 `;
 
 export const CardGrid = styled.div`
+  gap: 16px;
   display: grid;
   grid-template-columns: 1fr;
 
