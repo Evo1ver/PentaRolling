@@ -20,7 +20,7 @@ export const FormContainer = styled.main`
   margin: 0 auto;
 
   @media (min-width: ${TABLET}) {
-    padding: 40px 24px 80px;
+    padding: 104px 24px 80px;
     max-width: 860px;
   }
 `;
@@ -92,7 +92,6 @@ export const SubmitBar = styled.footer`
   padding: 16px 20px;
   background-color: ${({ $backgroundColor }) =>
     $backgroundColor ?? "var(--white)"};
-  border-top: 1px solid var(--gray-200);
 
   button {
     width: 100%;
