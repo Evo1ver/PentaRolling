@@ -3,7 +3,6 @@ import styled from "styled-components";
 const TABLET_BREAKPOINT = "768px"; // 768px 이상 시 적용
 
 export const Form = styled.form`
-  margin-top: 64px;
   padding: 50px 20px;
   display: flex;
   flex-direction: column;

@@ -4,6 +4,7 @@ import * as S from "./HeaderStyle";
 
 const Header = () => {
   const { pathname } = useLocation();
+
   const shouldShowButton = pathname === "/" || pathname === "/list";
 
   return (

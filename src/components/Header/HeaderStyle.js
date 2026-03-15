@@ -6,6 +6,7 @@ const MOBLIE_BREAKPOINT = "361px";
 export const HeaderContainer = styled.div`
   position: fixed;
   top: 0;
+  z-index: 100;
   width: 100%;
   height: 64px;
   padding: 12px 0;
@@ -16,6 +17,7 @@ export const HeaderContainer = styled.div`
     rgba(100, 100, 100, 1) 100%
   );
 `;
+
 export const HeaderContents = styled.div`
   display: flex;
   align-items: center;
