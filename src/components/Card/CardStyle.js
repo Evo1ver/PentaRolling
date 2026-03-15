@@ -4,7 +4,7 @@ import styled from "styled-components";
 // 공통 Base
 // ─────────────────────────────────────────────
 const BaseCardWrapper = styled.div`
-  width: 384px;
+  width: 100%;
   height: 280px;
   border-radius: 16px;
   background: var(--white);
