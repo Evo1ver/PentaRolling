@@ -2,16 +2,25 @@ import styled, { css } from "styled-components";
 
 export const CardContainer = styled.article`
   position: relative;
+  flex-shrink: 0;
   width: 275px;
   height: 260px;
   padding: 20px 20px 16px;
   border-radius: 24px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   overflow: hidden;
   border: 1px solid #000000;
   background-color: ${({ $backgroundColor }) =>
     $backgroundColor || "var(--bg-gray)"};
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-20px);
+    box-shadow: 8px 5px 10px rgba(0, 0, 0, 0.8);
+  }
 
   ${({ $backgroundImageUrl }) =>
     $backgroundImageUrl &&
@@ -32,6 +41,11 @@ export const CardContainer = styled.article`
         z-index: 0;
       }
     `}
+
+  @media (max-width: 767px) {
+    width: 208px;
+    height: 232px;
+  }
 `;
 
 export const CardContent = styled.div`
@@ -57,6 +71,11 @@ export const RecipientText = styled.h3`
     css`
       color: var(--white);
     `}
+
+  @media (max-width: 767px) {
+    font-size: 18px;
+    line-height: 1.3;
+  }
 `;
 
 export const AvatarGroup = styled.div`
@@ -72,11 +91,16 @@ export const AvatarItem = styled.div`
   height: 28px;
   border-radius: 50%;
   overflow: hidden;
-  border: 1px solid #ffffff;
+  box-shadow: 0 0 0 2px #ffffff;
   margin-left: -12px;
+
+  & > * {
+    border: none !important;
+    box-shadow: none !important;
+  }
 `;
 
-export const ExtraCount = styled.span`
+export const CountBadge = styled.span`
   padding: 6px 8px;
   margin-left: -14px;
   border-radius: 9999px;
@@ -104,6 +128,11 @@ export const MessageText = styled.p`
     css`
       color: #eeeeee;
     `}
+
+  @media (max-width: 767px) {
+    font-size: 16px;
+    line-height: 1.4;
+  }
 `;
 
 export const Divider = styled.div`
@@ -123,5 +152,33 @@ export const Footer = styled.footer`
   margin: 18px 0 4px 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
+
+  & > div {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 6px;
+    min-width: 0;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+
+    &:has(> :nth-child(3):last-child) {
+      justify-content: center;
+    }
+
+    & > div {
+      padding: 10px 10px;
+      font-size: 12px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+  }
 `;
