@@ -32,8 +32,12 @@ const SendMessage = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const { profileImages, isLoadingImages, backgroundColor } =
-    useRollingPaperData(recipientId);
+  const {
+    profileImages,
+    isLoadingImages,
+    backgroundColor,
+    backgroundImageURL,
+  } = useRollingPaperData(recipientId);
 
   const {
     form,
@@ -50,7 +54,10 @@ const SendMessage = () => {
   } = useMessageForm(recipientId, handleSuccess);
 
   return (
-    <S.PageWrapper $backgroundColor={backgroundColor}>
+    <S.PageWrapper
+      $backgroundColor={backgroundColor}
+      $backgroundImageURL={backgroundImageURL}
+    >
       <S.FormContainer>
         <S.Section>
           <Input

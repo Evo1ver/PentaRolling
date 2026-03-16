@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const TABLET = "768px";
 
@@ -7,6 +7,15 @@ export const PageWrapper = styled.div`
   flex-direction: column;
   min-height: 100dvh;
   background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#FFFFFF"};
+
+  ${({ $backgroundImageURL }) =>
+    $backgroundImageURL &&
+    css`
+      background-image: url(${$backgroundImageURL});
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    `}
 `;
 
 export const FormContainer = styled.main`
