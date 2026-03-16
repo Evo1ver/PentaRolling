@@ -1,9 +1,9 @@
 import { useRef, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
-import ToastListContainer from "../styles/Toast/ToastListContainer";
-import Toast from "../components/Toast";
+import { ToastListContainer } from "../components/common/Toast/ToastStyle";
+import Toast from "../components/common/Toast/Toast";
 import { ToastsContext } from "./ToastsContext";
-import successIcon from "/src/assets/images/success.svg";
+import successIcon from "/src/assets/icons/success.svg";
 
 export const ToastsContextProvider = ({ children, maxCount = 3 }) => {
   const [toastList, setToastList] = useState([]);
