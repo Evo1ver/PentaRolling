@@ -1,13 +1,7 @@
 import Avatar from "../common/Avatar/Avatar";
-import EmojiBadge from "../common/Badge/EmojiBadge";
+import EmojiBadge from "../common/EmojiBadge/EmojiBadge";
+import { CARD_BACKGROUND_COLORS } from "../../constants/backgroundColors";
 import * as S from "./CardListStyle";
-
-const BACKGROUND_COLORS = {
-  beige: "#FFE2AD",
-  purple: "#ECD9FF",
-  blue: "#B1E4FF",
-  green: "#D0F5C3",
-};
 
 const CardList = ({
   recipientName,
@@ -27,7 +21,7 @@ const CardList = ({
   const displayReactions = reactions.length >= 4 ? [] : reactions.slice(0, 3);
 
   const themeColor =
-    BACKGROUND_COLORS[backgroundColor] || BACKGROUND_COLORS.beige;
+    CARD_BACKGROUND_COLORS[backgroundColor] || CARD_BACKGROUND_COLORS.beige;
 
   return (
     <S.CardContainer
