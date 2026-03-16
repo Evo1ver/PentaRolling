@@ -102,6 +102,15 @@ export const SubmitBar = styled.footer`
   background-color: ${({ $backgroundColor }) =>
     $backgroundColor ?? "var(--white)"};
 
+  ${({ $backgroundImageURL }) =>
+    $backgroundImageURL &&
+    css`
+      background-image: url(${$backgroundImageURL});
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    `}
+
   button {
     width: 100%;
     max-width: 720px;

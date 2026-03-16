@@ -113,7 +113,10 @@ const SendMessage = () => {
         </S.Section>
       </S.FormContainer>
 
-      <S.SubmitBar $backgroundColor={backgroundColor}>
+      <S.SubmitBar
+        $backgroundColor={backgroundColor}
+        $backgroundImageURL={backgroundImageURL}
+      >
         <Button
           variant="primary"
           size="large"
