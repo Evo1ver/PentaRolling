@@ -1,18 +1,27 @@
-import useToast from "./hooks/useToast";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Header from "./components/Header/Header";
+import MainPage from "./pages/MainPage/MainPage";
+import CreateRollingPaperPage from "./pages/CreateRollingPaperPage/CreateRollingPaperPage";
+import APITest from "./pages/Test/APITest";
+import useBreakPoint from "./hooks/useBreakPoint";
 
 const App = () => {
-  const { createToast } = useToast();
+  const { pathname } = useLocation();
+  const { isMobile } = useBreakPoint();
 
-  const handleCreate = () => {
-    createToast({
-      message: "URL이 복사되었습니다.",
-    });
-  };
+  const shouldShowHeader =
+    !isMobile || pathname === "/" || pathname === "/list";
 
   return (
-    <div>
-      <button onClick={handleCreate}>생성</button>
-    </div>
+    <>
+      {shouldShowHeader && <Header />}
+
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/post" element={<CreateRollingPaperPage />} />
+        <Route path="/test" element={<APITest />} />
+      </Routes>
+    </>
   );
 };
 

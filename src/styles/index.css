@@ -1,0 +1,48 @@
+:root {
+  --primary: #d8e1e8;
+
+  --error: #f74747;
+  --white: #ffffff;
+  --black: #000000;
+  --surface: #f6f8ff;
+
+  --bg-blue: #cfe5ff;
+  --bg-gray: #fcfcfc;
+
+  --gray-100: #f6f6f6;
+  --gray-200: #eeeeee;
+  --gray-300: #cccccc;
+  --gray-400: #999999;
+  --gray-500: #555555;
+  --gray-600: #4a4a4a;
+  --gray-700: #3a3a3a;
+  --gray-800: #2b2b2b;
+  --gray-900: #181818;
+
+  --font-28-bold: 700 28px/42px "Pretendard";
+  --font-24-bold: 700 24px/36px "Pretendard";
+  --font-24-regular: 400 24px/36px "Pretendard";
+  --font-20-bold: 700 20px/30px "Pretendard";
+  --font-20-regular: 400 20px/30px "Pretendard";
+  --font-18-bold: 700 18px/28px "Pretendard";
+  --font-18-regular: 400 18px/28px "Pretendard";
+  --font-16-bold: 700 16px/26px "Pretendard";
+  --font-16-regular: 400 16px/26px "Pretendard";
+  --font-15-bold: 700 15px/22px "Pretendard";
+  --font-15-regular: 400 15px/22px "Pretendard";
+  --font-14-bold: 700 14px/20px "Pretendard";
+  --font-14-regular: 400 14px/20px "Pretendard";
+  --font-12-regular: 400 12px/18px "Pretendard";
+}
+
+body {
+  font-family: "Pretendard", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
