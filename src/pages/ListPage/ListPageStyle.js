@@ -6,6 +6,7 @@ export const ListContainer = styled.div`
 
 export const MainContent = styled.main`
   padding: 40px 0;
+  padding-top: 104px;
   background-color: #ffffff;
   min-height: 100vh;
 `;
