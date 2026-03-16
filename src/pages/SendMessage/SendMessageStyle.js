@@ -14,13 +14,13 @@ export const FormContainer = styled.main`
   display: flex;
   flex-direction: column;
   gap: 50px;
-  padding: 24px 20px 80px;
+  padding: 24px 20px 180px;
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
 
   @media (min-width: ${TABLET}) {
-    padding: 104px 24px 80px;
+    padding: 104px 24px 180px;
     max-width: 860px;
   }
 `;
@@ -89,7 +89,7 @@ export const SubmitBar = styled.footer`
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 16px 20px;
+  padding: 24px 20px;
   background-color: ${({ $backgroundColor }) =>
     $backgroundColor ?? "var(--white)"};
 
@@ -101,7 +101,7 @@ export const SubmitBar = styled.footer`
   }
 
   @media (min-width: ${TABLET}) {
-    padding: 16px 24px;
+    padding: 24px 24px;
 
     button {
       max-width: 860px;
