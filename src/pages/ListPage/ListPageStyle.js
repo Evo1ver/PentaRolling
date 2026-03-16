@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const skeletonShimmer = keyframes`
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+`;
 
 export const ListContainer = styled.div`
   width: 100%;
@@ -30,6 +39,36 @@ export const Title = styled.h2`
     font-size: 20px;
     margin-bottom: 0;
     padding-left: 20px;
+  }
+`;
+
+export const TitleSkeleton = styled.div`
+  width: 200px;
+  height: 28px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+  background-color: #e0e0e0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%);
+    animation: ${skeletonShimmer} 1.2s infinite;
+  }
+
+  @media (max-width: 767px) {
+    width: 160px;
+    height: 24px;
+    margin-left: 20px;
   }
 `;
 
@@ -145,4 +184,32 @@ export const ArrowButtonWrapper = styled.div`
     right: -20px;
 
   `}
+`;
+
+export const SkeletonCard = styled.div`
+  flex: 0 0 275px;
+  height: 260px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  background-color: #e0e0e0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%);
+    animation: ${skeletonShimmer} 1.2s infinite;
+  }
+
+  @media (max-width: 767px) {
+    flex: 0 0 208px;
+    height: 232px;
+  }
 `;
