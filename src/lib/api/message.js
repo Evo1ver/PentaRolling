@@ -7,10 +7,6 @@ import { teamInstance } from "./axios";
  */
 export const getMessage = async (messageId) => {
   const response = await teamInstance.get(`messages/${messageId}/`);
-
-  if (response.status !== 200)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
 
@@ -23,16 +19,11 @@ export const getMessage = async (messageId) => {
 export const putMessage = async (messageId, messageData) => {
   // data에 team을 설정하지 않은 경우를 위한 방어선
   if (!messageData.team) {
-    messageData.team = "23-2";
+    messageData = { ...messageData, team: "23-2" };
   }
-
-  const response = await teamInstance.put(`messages/${messageId}/`, {
+  const response = await teamInstance.put(`/messages/${messageId}/`, {
     ...messageData,
   });
-
-  if (response.status !== 200)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
 
@@ -47,9 +38,6 @@ export const patchMessage = async (messageId, messageData) => {
     ...messageData,
   });
 
-  if (response.status !== 200)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response.data;
 };
 
@@ -60,10 +48,6 @@ export const patchMessage = async (messageId, messageData) => {
  */
 export const deleteMessage = async (messageId) => {
   const response = await teamInstance.delete(`messages/${messageId}/`);
-
-  if (response.status !== 204)
-    throw new Error(`Fetch error, status code: ${response.status}`);
-
   return response;
 };
 

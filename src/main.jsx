@@ -5,13 +5,16 @@ import ModalContextProvider from "./contexts/ModalProvider";
 import { BrowserRouter } from "react-router-dom";
 import "./styles/reset.css";
 import "./styles/index.css";
+import { ToastsContextProvider } from "./contexts/ToastsProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ModalContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ToastsContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ToastsContextProvider>
     </ModalContextProvider>
   </StrictMode>,
 );
