@@ -2,8 +2,7 @@ import { useState, useEffect, useRef, useCallback, useReducer } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import EmojiPicker from "emoji-picker-react";
 import Avatar from "../../components/common/Avatar/Avatar";
-import { AddCard, NormalCard } from "../../components/Card/Card";
-import CardModal from "../../components/CardModal/CardModal";
+import { NormalCard } from "../../components/Card/Card";
 import { Button, EmojiButton } from "../../components/common/Button/Button";
 import EmojiBadge from "../../components/common/EmojiBadge/EmojiBadge";
 import useToast from "../../hooks/useToast";
@@ -355,7 +354,6 @@ const PostMessage = () => {
 
   const [recipient, setRecipient] = useState(null);
   const [reactions, setReactions] = useState([]);
-  const [selectedMsg, setSelectedMsg] = useState(null);
 
   const { messages, isLoading, hasMore, loadNext, removeMessage } =
     useInfiniteMessages(id);
@@ -483,33 +481,28 @@ const PostMessage = () => {
         </S.PCEditBar>
         <S.CardGrid>
           {messages.map((msg) => (
-            <NormalCard
-              key={msg.id}
-              name={msg.sender}
-              relationship={msg.relationship}
-              profileImg={msg.profileImageURL}
-              content={parseContent(msg.content)}
-              date={formatDate(msg.createdAt)}
-              showDeleteButton
-              onDelete={() => handleMessageDelete(msg.id)}
-            />
+            <S.CardWrapper key={msg.id}>
+              <NormalCard
+                key={msg.id}
+                name={msg.sender}
+                relationship={msg.relationship}
+                profileImg={msg.profileImageURL}
+                content={parseContent(msg.content)}
+                date={formatDate(msg.createdAt)}
+                showDeleteButton
+                onDelete={() => handleMessageDelete(msg.id)}
+              />
+              <S.CardClickOverlay
+                onClick={() => {
+                  navigate(`/post/${id}/message/${msg.id}`);
+                }}
+              />
+            </S.CardWrapper>
           ))}
         </S.CardGrid>
         <S.Sentinel ref={sentinelRef} />
         {isLoading && <S.LoadingSpinner />}
       </S.ContentArea>
-
-      {selectedMsg && (
-        <CardModal
-          name={selectedMsg.sender}
-          relationship={selectedMsg.relationship}
-          content={parseContent(selectedMsg.content)}
-          createdDate={formatDate(selectedMsg.createdAt)}
-          profileImg={selectedMsg.profileImageURL}
-          fonts={selectedMsg.font}
-          onCloseModal={() => setSelectedMsg(null)}
-        />
-      )}
     </S.PageWrapper>
   );
 };

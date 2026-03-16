@@ -7,6 +7,7 @@ import useBreakPoint from "./hooks/useBreakPoint";
 import PostMessage from "./pages/PostMessage/PostMessage";
 import EditMessage from "./pages/EditMessage/EditMessage";
 import SendMessage from "./pages/SendMessage/SendMessage";
+import UpdateMessage from "./pages/UpdateMessage/UpdateMessage";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -24,6 +25,10 @@ const App = () => {
         <Route path="/post" element={<CreateRollingPaperPage />} />
         <Route path="/post/:id" element={<PostMessage />} />
         <Route path="/post/:id/message" element={<SendMessage />} />
+        <Route
+          path="/post/:id/message/:messageId"
+          element={<UpdateMessage />}
+        />
         <Route path="/post/:id/edit" element={<EditMessage />} />
         <Route path="/test" element={<APITest />} />
       </Routes>
