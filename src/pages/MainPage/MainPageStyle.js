@@ -166,5 +166,6 @@ export const ButtonWrapper = styled.div`
 
   @media (width >= ${TABLET_BREAKPOINT}) {
     width: 280px;
+    padding: 0;
   }
 `;
