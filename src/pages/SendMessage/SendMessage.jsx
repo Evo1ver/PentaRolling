@@ -58,7 +58,7 @@ const SendMessage = () => {
       $backgroundColor={backgroundColor}
       $backgroundImageURL={backgroundImageURL}
     >
-      <S.FormContainer>
+      <S.FormContainer $hasBackgroundImage={!!backgroundImageURL}>
         <S.Section>
           <Input
             formType="from"
@@ -66,17 +66,24 @@ const SendMessage = () => {
             error={errors.from}
             onChange={handleFromChange}
             onBlur={handleFromBlur}
+            hasBackgroundImage={!!backgroundImageURL}
           />
         </S.Section>
 
         <S.Section>
-          <S.SectionTitle>프로필 이미지</S.SectionTitle>
+          <S.SectionTitle $hasBackgroundImage={!!backgroundImageURL}>
+            프로필 이미지
+          </S.SectionTitle>
           <S.ProfileImageRow>
             <ProfileAvatar src={form.profileImage} size="large" />
             <S.AvatarSelectorWrapper>
-              <S.SelectorGuide>프로필 이미지를 선택해주세요!</S.SelectorGuide>
+              <S.SelectorGuide $hasBackgroundImage={!!backgroundImageURL}>
+                프로필 이미지를 선택해주세요!
+              </S.SelectorGuide>
               {isLoadingImages ? (
-                <S.LoadingText>이미지 불러오는 중...</S.LoadingText>
+                <S.LoadingText $hasBackgroundImage={!!backgroundImageURL}>
+                  이미지 불러오는 중...
+                </S.LoadingText>
               ) : (
                 <AvatarSelector
                   profileImages={profileImages}
@@ -90,7 +97,9 @@ const SendMessage = () => {
         </S.Section>
 
         <S.Section>
-          <S.SectionTitle>상대와의 관계</S.SectionTitle>
+          <S.SectionTitle $hasBackgroundImage={!!backgroundImageURL}>
+            상대와의 관계
+          </S.SectionTitle>
           <Dropdown
             type={RELATIONS}
             value={form.relationship}
@@ -99,12 +108,16 @@ const SendMessage = () => {
         </S.Section>
 
         <S.Section>
-          <S.SectionTitle>내용을 입력해 주세요</S.SectionTitle>
+          <S.SectionTitle $hasBackgroundImage={!!backgroundImageURL}>
+            내용을 입력해 주세요
+          </S.SectionTitle>
           <Textarea value={form.content} onChange={handleContentChange} />
         </S.Section>
 
         <S.Section>
-          <S.SectionTitle>폰트 선택</S.SectionTitle>
+          <S.SectionTitle $hasBackgroundImage={!!backgroundImageURL}>
+            폰트 선택
+          </S.SectionTitle>
           <Dropdown
             type={FONTS}
             value={form.font}

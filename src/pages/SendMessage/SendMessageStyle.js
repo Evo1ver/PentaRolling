@@ -23,14 +23,34 @@ export const FormContainer = styled.main`
   display: flex;
   flex-direction: column;
   gap: 50px;
-  padding: 24px 20px 80px;
+  padding: 24px 20px 180px;
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
 
+  ${({ $hasBackgroundImage }) =>
+    $hasBackgroundImage &&
+    css`
+      background-color: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      margin-top: 16px;
+      margin-bottom: 100px;
+      padding: 24px 20px;
+    `}
+
   @media (min-width: ${TABLET}) {
-    padding: 104px 24px 80px;
+    padding: 104px 24px 180px;
     max-width: 860px;
+
+    ${({ $hasBackgroundImage }) =>
+      $hasBackgroundImage &&
+      css`
+        padding: 40px 40px 180px;
+        margin-top: 24px;
+        margin-bottom: 100px;
+        border-radius: 16px;
+      `}
   }
 `;
 
@@ -42,7 +62,8 @@ export const Section = styled.section`
 
 export const SectionTitle = styled.h2`
   font: var(--font-24-bold);
-  color: var(--gray-900);
+  color: ${({ $hasBackgroundImage }) =>
+    $hasBackgroundImage ? "var(--white)" : "var(--gray-900)"};
 `;
 
 export const ProfileImageRow = styled.div`
@@ -66,12 +87,10 @@ export const AvatarSelectorWrapper = styled.div`
   gap: 8px;
   flex: 1;
 
-  /* AvatarSelectorContainer gap, wrap override */
   & > div {
     flex-wrap: wrap;
     gap: 2px;
 
-    /* AvatarOption padding override */
     button {
       padding: 0;
     }
@@ -85,12 +104,14 @@ export const AvatarSelectorWrapper = styled.div`
 
 export const SelectorGuide = styled.p`
   font: var(--font-14-regular);
-  color: var(--gray-500);
+  color: ${({ $hasBackgroundImage }) =>
+    $hasBackgroundImage ? "var(--white)" : "var(--gray-500)"};
 `;
 
 export const LoadingText = styled.p`
   font: var(--font-14-regular);
-  color: var(--gray-400);
+  color: ${({ $hasBackgroundImage }) =>
+    $hasBackgroundImage ? "var(--white)" : "var(--gray-400)"};
 `;
 
 export const SubmitBar = styled.footer`
@@ -98,9 +119,10 @@ export const SubmitBar = styled.footer`
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 16px 20px;
+  padding: 24px 20px;
   background-color: ${({ $backgroundColor }) =>
     $backgroundColor ?? "var(--white)"};
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 
   ${({ $backgroundImageURL }) =>
     $backgroundImageURL &&
@@ -119,7 +141,7 @@ export const SubmitBar = styled.footer`
   }
 
   @media (min-width: ${TABLET}) {
-    padding: 16px 24px;
+    padding: 24px;
 
     button {
       max-width: 860px;
