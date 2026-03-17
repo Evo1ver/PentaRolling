@@ -58,6 +58,7 @@ export const HeaderInner = styled.div`
 export const MobileSecondRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 20px 12px;
 
   ${tablet} {
@@ -177,9 +178,32 @@ export const VertDivider = styled.div`
 `;
 
 export const ActionGroup = styled.div`
+  display: none;
+
+  ${tablet} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+`;
+
+export const MobileActionGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
+
+  & > button {
+    min-width: 36px;
+  }
+`;
+
+export const ReactionArea = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
 `;
 
 export const RelativeWrap = styled.div`

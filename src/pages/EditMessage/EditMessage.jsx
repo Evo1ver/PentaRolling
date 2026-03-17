@@ -17,6 +17,7 @@ import { deleteMessage, getMessageList } from "../../lib/api/message";
 import { getReactions, addReaction } from "../../lib/api/reaction";
 import * as S from "./EditMessageStyle";
 import { formatDate } from "../../lib/date";
+import useBreakPoint from "../../hooks/useBreakPoint";
 
 const PAGE_SIZE = 6;
 
@@ -212,6 +213,7 @@ const PostMessageHeader = ({
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [showReactionAll, setShowReactionAll] = useState(false);
+  const { isMobile } = useBreakPoint();
 
   const avatars = (recipient?.recentMessages ?? [])
     .map((m) => m.profileImageURL)
@@ -280,7 +282,7 @@ const PostMessageHeader = ({
                   ))}
                   {topReactions.length > 3 && (
                     <S.MoreReactionBtn onClick={toggleReactionAll}>
-                      {showReactionAll ? "▲" : "▼"}
+                      {showReactionAll ? "◀" : "▶"}
                     </S.MoreReactionBtn>
                   )}
                 </S.ReactionList>
@@ -289,49 +291,82 @@ const PostMessageHeader = ({
             )}
           </S.TabletOnly>
 
-          <S.ActionGroup>
-            <S.RelativeWrap>
-              <EmojiButton onClick={handleEmojiButtonClick} />
-              {showEmojiPicker && (
-                <EmojiPickerPopover
-                  recipientId={recipientId}
-                  onClose={() => setShowEmojiPicker(false)}
-                  onReacted={onReacted}
-                />
-              )}
-            </S.RelativeWrap>
+          {!isMobile && (
+            <S.ActionGroup>
+              <S.RelativeWrap>
+                <EmojiButton onClick={handleEmojiButtonClick} />
+                {showEmojiPicker && (
+                  <EmojiPickerPopover
+                    recipientId={recipientId}
+                    onClose={() => setShowEmojiPicker(false)}
+                    onReacted={onReacted}
+                  />
+                )}
+              </S.RelativeWrap>
 
-            <S.VertDivider />
+              <S.VertDivider />
 
-            <S.RelativeWrap>
-              <EmojiButton icon={shareIcon} onClick={handleShareButtonClick} />
-              {showShareMenu && (
-                <ShareDropdown
-                  recipientName={recipient?.name ?? ""}
-                  onClose={() => setShowShareMenu(false)}
-                  onUrlCopied={onUrlCopied}
+              <S.RelativeWrap>
+                <EmojiButton
+                  icon={shareIcon}
+                  onClick={handleShareButtonClick}
                 />
-              )}
-            </S.RelativeWrap>
-          </S.ActionGroup>
+                {showShareMenu && (
+                  <ShareDropdown
+                    recipientName={recipient?.name ?? ""}
+                    onClose={() => setShowShareMenu(false)}
+                    onUrlCopied={onUrlCopied}
+                  />
+                )}
+              </S.RelativeWrap>
+            </S.ActionGroup>
+          )}
         </S.HeaderRight>
       </S.HeaderInner>
 
       <S.MobileSecondRow>
-        {topReactions.length > 0 && (
-          <>
-            <S.ReactionList>
-              {visibleReactions.map((r) => (
-                <EmojiBadge key={r.id} emoji={r.emoji} number={r.count} />
-              ))}
-            </S.ReactionList>
-            {topReactions.length > 3 && (
-              <S.MoreReactionBtn onClick={toggleReactionAll}>
-                {showReactionAll ? "▲" : "▼"}
-              </S.MoreReactionBtn>
+        <S.ReactionArea>
+          {topReactions.length > 0 && (
+            <>
+              <S.ReactionList>
+                {visibleReactions.map((r) => (
+                  <EmojiBadge key={r.id} emoji={r.emoji} number={r.count} />
+                ))}
+              </S.ReactionList>
+              {topReactions.length > 3 && (
+                <S.MoreReactionBtn onClick={toggleReactionAll}>
+                  {showReactionAll ? "▲" : "▼"}
+                </S.MoreReactionBtn>
+              )}
+            </>
+          )}
+        </S.ReactionArea>
+
+        <S.MobileActionGroup>
+          <S.RelativeWrap>
+            <EmojiButton onClick={handleEmojiButtonClick} />
+            {showEmojiPicker && (
+              <EmojiPickerPopover
+                recipientId={recipientId}
+                onClose={() => setShowEmojiPicker(false)}
+                onReacted={onReacted}
+              />
             )}
-          </>
-        )}
+          </S.RelativeWrap>
+
+          <S.VertDivider />
+
+          <S.RelativeWrap>
+            <EmojiButton icon={shareIcon} onClick={handleShareButtonClick} />
+            {showShareMenu && (
+              <ShareDropdown
+                recipientName={recipient?.name ?? ""}
+                onClose={() => setShowShareMenu(false)}
+                onUrlCopied={onUrlCopied}
+              />
+            )}
+          </S.RelativeWrap>
+        </S.MobileActionGroup>
       </S.MobileSecondRow>
     </S.HeaderBar>
   );
