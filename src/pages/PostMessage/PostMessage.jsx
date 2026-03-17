@@ -8,6 +8,7 @@ import { Button, EmojiButton } from "../../components/common/Button/Button";
 import EmojiBadge from "../../components/common/EmojiBadge/EmojiBadge";
 import useToast from "../../hooks/useToast";
 import successIcon from "/src/assets/icons/success.svg";
+import shareIcon from "/src/assets/icons/share.svg";
 import BACKGROUND_COLORS from "../../constants/backgroundColors";
 import { getRollingPaper } from "../../lib/api/rollingPaper";
 import { getMessageList } from "../../lib/api/message";
@@ -148,10 +149,13 @@ const ShareDropdown = ({ recipientName, onClose, onUrlCopied }) => {
   }, [onClose]);
 
   const handleKakaoShare = () => {
-    if (!window.Kakao?.isInitialized()) {
-      alert("카카오 SDK가 초기화되지 않았습니다.");
+    if (!window.Kakao) {
+      alert("카카오 SDK를 불러올 수 없습니다.");
       onClose();
       return;
+    }
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(import.meta.env.VITE_KAKAO_JS_KEY);
     }
     window.Kakao.Share.sendDefault({
       objectType: "feed",
@@ -295,13 +299,7 @@ const PostMessageHeader = ({
             <S.VertDivider />
 
             <S.RelativeWrap>
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={handleShareButtonClick}
-              >
-                공유
-              </Button>
+              <EmojiButton icon={shareIcon} onClick={handleShareButtonClick} />
               {showShareMenu && (
                 <ShareDropdown
                   recipientName={recipient?.name ?? ""}

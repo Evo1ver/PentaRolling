@@ -7,6 +7,7 @@ import { Button, EmojiButton } from "../../components/common/Button/Button";
 import EmojiBadge from "../../components/common/EmojiBadge/EmojiBadge";
 import useToast from "../../hooks/useToast";
 import successIcon from "/src/assets/icons/success.svg";
+import shareIcon from "/src/assets/icons/share.svg";
 import BACKGROUND_COLORS from "../../constants/backgroundColors";
 import {
   deleteRollingPaper,
@@ -22,13 +23,6 @@ const PAGE_SIZE = 6;
 const BG_COLOR_MAP = Object.fromEntries(
   BACKGROUND_COLORS.map(({ label, color }) => [label, color]),
 );
-
-const parseContent = (raw) => {
-  if (!raw) return "";
-  return new DOMParser()
-    .parseFromString(raw, "text/html")
-    .body.textContent.trim();
-};
 
 const getTopReactions = (reactions) =>
   [...reactions].sort((a, b) => b.count - a.count).slice(0, 6);
@@ -160,10 +154,13 @@ const ShareDropdown = ({ recipientName, onClose, onUrlCopied }) => {
   }, [onClose]);
 
   const handleKakaoShare = () => {
-    if (!window.Kakao?.isInitialized()) {
-      alert("카카오 SDK가 초기화되지 않았습니다.");
+    if (!window.Kakao) {
+      alert("카카오 SDK를 불러올 수 없습니다.");
       onClose();
       return;
+    }
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(import.meta.env.VITE_KAKAO_JS_KEY);
     }
     window.Kakao.Share.sendDefault({
       objectType: "feed",
@@ -307,13 +304,7 @@ const PostMessageHeader = ({
             <S.VertDivider />
 
             <S.RelativeWrap>
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={handleShareButtonClick}
-              >
-                공유
-              </Button>
+              <EmojiButton icon={shareIcon} onClick={handleShareButtonClick} />
               {showShareMenu && (
                 <ShareDropdown
                   recipientName={recipient?.name ?? ""}
@@ -396,10 +387,9 @@ const PostMessage = () => {
     });
   };
 
-  const handleMessageDelete = (msgId) => {
+  const handleMessageDelete = async (msgId) => {
     try {
-      deleteMessage(msgId);
-      console.log("실행됨");
+      await deleteMessage(msgId);
 
       removeMessage(msgId);
 
@@ -413,15 +403,17 @@ const PostMessage = () => {
     }
   };
 
-  const handleRollingPaperDelete = () => {
-    const res = deleteRollingPaper(id);
-    if (res) {
+  const handleRollingPaperDelete = async () => {
+    try {
+      await deleteRollingPaper(id);
       createToast({
         message: "롤링페이퍼가 삭제되었습니다.",
         icon: successIcon,
         duration: 5,
       });
       navigate("/list");
+    } catch (error) {
+      console.error("롤링페이퍼 삭제 중 오류:", error);
     }
   };
 
@@ -487,7 +479,7 @@ const PostMessage = () => {
                 name={msg.sender}
                 relationship={msg.relationship}
                 profileImg={msg.profileImageURL}
-                content={parseContent(msg.content)}
+                content={msg.content}
                 date={formatDate(msg.createdAt)}
                 showDeleteButton
                 onDelete={() => handleMessageDelete(msg.id)}

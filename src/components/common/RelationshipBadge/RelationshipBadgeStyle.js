@@ -8,5 +8,4 @@ export const RelationshipBadgeContainer = styled.div`
   color: var(--black);
   font: var(--font-14-regular);
   width: fit-content;
-  height: 20px;
 `;

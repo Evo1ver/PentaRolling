@@ -34,6 +34,8 @@ const ListPage = () => {
 
   const [popularCards, setPopularCards] = useState([]);
   const [recentCards, setRecentCards] = useState([]);
+  const [isLoadingPopular, setIsLoadingPopular] = useState(true);
+  const [isLoadingRecent, setIsLoadingRecent] = useState(true);
   const [popularPage, setPopularPage] = useState(0);
   const [recentPage, setRecentPage] = useState(0);
 
@@ -51,6 +53,7 @@ const ListPage = () => {
   useEffect(() => {
     const fetchPopular = async () => {
       try {
+        setIsLoadingPopular(true);
         const response = await axios.get(API_URL, {
           params: { limit: 8, offset: 0, sort: "like" },
         });
@@ -62,11 +65,14 @@ const ListPage = () => {
         setPopularPage(0);
       } catch (error) {
         console.error("인기 데이터 불러오기 실패:", error);
+      } finally {
+        setIsLoadingPopular(false);
       }
     };
 
     const fetchRecent = async () => {
       try {
+        setIsLoadingRecent(true);
         const response = await axios.get(API_URL, {
           params: { limit: 8, offset: 0 },
         });
@@ -74,6 +80,8 @@ const ListPage = () => {
         setRecentPage(0);
       } catch (error) {
         console.error("최근 데이터 불러오기 실패:", error);
+      } finally {
+        setIsLoadingRecent(false);
       }
     };
 
@@ -119,6 +127,16 @@ const ListPage = () => {
     );
   };
 
+  const renderSkeletonList = () => {
+    return (
+      <>
+        {Array.from({ length: PAGE_SIZE }).map((_, index) => (
+          <S.SkeletonCard key={index} />
+        ))}
+      </>
+    );
+  };
+
   const popularLastPage = Math.max(getTotalPages(popularCards) - 1, 0);
   const recentLastPage = Math.max(getTotalPages(recentCards) - 1, 0);
 
@@ -129,7 +147,7 @@ const ListPage = () => {
         <S.Section>
           <S.Title>인기 롤링 페이퍼 🔥</S.Title>
           <S.CardSection>
-            {popularPage > 0 && (
+            {!isLoadingPopular && popularPage > 0 && (
               <S.ArrowButtonWrapper $direction="left">
                 <ArrowButton
                   direction="left"
@@ -146,9 +164,11 @@ const ListPage = () => {
               </S.ArrowButtonWrapper>
             )}
             <S.CardWrapper ref={popularRef}>
-              {renderCardList(popularCards)}
+              {isLoadingPopular
+                ? renderSkeletonList()
+                : renderCardList(popularCards)}
             </S.CardWrapper>
-            {popularPage < popularLastPage && (
+            {!isLoadingPopular && popularPage < popularLastPage && (
               <S.ArrowButtonWrapper $direction="right">
                 <ArrowButton
                   direction="right"
@@ -170,7 +190,7 @@ const ListPage = () => {
         <S.Section>
           <S.Title>최근에 만든 롤링 페이퍼 ⭐</S.Title>
           <S.CardSection>
-            {recentPage > 0 && (
+            {!isLoadingRecent && recentPage > 0 && (
               <S.ArrowButtonWrapper $direction="left">
                 <ArrowButton
                   direction="left"
@@ -187,9 +207,11 @@ const ListPage = () => {
               </S.ArrowButtonWrapper>
             )}
             <S.CardWrapper ref={recentRef}>
-              {renderCardList(recentCards)}
+              {isLoadingRecent
+                ? renderSkeletonList()
+                : renderCardList(recentCards)}
             </S.CardWrapper>
-            {recentPage < recentLastPage && (
+            {!isLoadingRecent && recentPage < recentLastPage && (
               <S.ArrowButtonWrapper $direction="right">
                 <ArrowButton
                   direction="right"
