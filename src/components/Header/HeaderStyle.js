@@ -39,7 +39,7 @@ export const HeaderButton = styled(Button)`
   font: var(--font-14-bold);
 
   @media (width >= ${MOBLIE_BREAKPOINT}) {
-    width: 152px;
+    width: 100%;
     font: var(--font-16-bold);
   }
 `;
