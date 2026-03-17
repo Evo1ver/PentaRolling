@@ -84,6 +84,7 @@ export const AvatarGroup = styled.div`
   gap: 4px;
   padding: 0 0 10px 15px;
   margin-top: -10px;
+  min-height: 38px;
 `;
 
 export const AvatarItem = styled.div`
@@ -111,7 +112,7 @@ export const CountBadge = styled.span`
 
 export const Body = styled.div`
   margin-top: 24px;
-  margin-bottom: auto;
+  margin-bottom: 18px;
 `;
 
 export const MessageText = styled.p`
@@ -127,6 +128,16 @@ export const MessageText = styled.p`
     $backgroundImageUrl &&
     css`
       color: #eeeeee;
+    `}
+
+  ${({ $isEmptyState }) =>
+    $isEmptyState &&
+    css`
+      padding-bottom: 30px;
+
+      @media (max-width: 767px) {
+        padding-bottom: 9px;
+      }
     `}
 
   @media (max-width: 767px) {
