@@ -16,6 +16,7 @@ const useRollingPaperData = (recipientId) => {
   const [profileImages, setProfileImages] = useState([]);
   const [isLoadingImages, setIsLoadingImages] = useState(true);
   const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
+  const [backgroundImageURL, setBackgroundImageURL] = useState(null);
 
   useEffect(() => {
     getProfileImages()
@@ -26,13 +27,22 @@ const useRollingPaperData = (recipientId) => {
 
   useEffect(() => {
     getRollingPaper(recipientId)
-      .then((data) =>
-        setBackgroundColor(BG_COLOR_MAP[data.backgroundColor] ?? "#FFFFFF"),
-      )
-      .catch(() => setBackgroundColor("#FFFFFF"));
+      .then((data) => {
+        setBackgroundColor(BG_COLOR_MAP[data.backgroundColor] ?? "#FFFFFF");
+        setBackgroundImageURL(data.backgroundImageURL ?? null);
+      })
+      .catch(() => {
+        setBackgroundColor("#FFFFFF");
+        setBackgroundImageURL(null);
+      });
   }, [recipientId]);
 
-  return { profileImages, isLoadingImages, backgroundColor };
+  return {
+    profileImages,
+    isLoadingImages,
+    backgroundColor,
+    backgroundImageURL,
+  };
 };
 
 export default useRollingPaperData;

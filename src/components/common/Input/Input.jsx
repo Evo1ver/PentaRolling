@@ -4,10 +4,17 @@ const FROM_PLACEHOLDER = "이름을 입력해 주세요.";
 const TO_PLACEHOLDER = "받는 사람 이름을 입력해 주세요.";
 const ERROR_MESSAGE = "값을 입력해 주세요.";
 
-const Input = ({ value, error, formType, onChange, onBlur }) => {
+const Input = ({
+  value,
+  error,
+  formType,
+  onChange,
+  onBlur,
+  hasBackgroundImage,
+}) => {
   return (
     <S.InputContainer>
-      <S.Label htmlFor={formType}>
+      <S.Label htmlFor={formType} $hasBackgroundImage={hasBackgroundImage}>
         {formType === "from" ? "From" : "To"}
       </S.Label>
       <S.InputContents
