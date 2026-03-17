@@ -27,13 +27,6 @@ const formatDate = (dateStr) => {
   return `${d.getFullYear()}. ${String(d.getMonth() + 1).padStart(2, "0")}. ${String(d.getDate()).padStart(2, "0")}`;
 };
 
-const parseContent = (raw) => {
-  if (!raw) return "";
-  return new DOMParser()
-    .parseFromString(raw, "text/html")
-    .body.textContent.trim();
-};
-
 const getTopReactions = (reactions) =>
   [...reactions].sort((a, b) => b.count - a.count).slice(0, 6);
 
@@ -425,7 +418,7 @@ const PostMessage = () => {
                 name={msg.sender}
                 relationship={msg.relationship}
                 profileImg={msg.profileImageURL}
-                content={parseContent(msg.content)}
+                content={msg.content}
                 date={formatDate(msg.createdAt)}
               />
               <S.CardClickOverlay
@@ -444,7 +437,7 @@ const PostMessage = () => {
         <CardModal
           name={selectedMsg.sender}
           relationship={selectedMsg.relationship}
-          content={parseContent(selectedMsg.content)}
+          content={selectedMsg.content}
           createdDate={formatDate(selectedMsg.createdAt)}
           profileImg={selectedMsg.profileImageURL}
           fonts={selectedMsg.font}
