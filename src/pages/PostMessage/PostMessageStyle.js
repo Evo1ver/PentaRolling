@@ -198,8 +198,8 @@ export const MobileActionGroup = styled.div`
   gap: 8px;
   flex-shrink: 0;
 
-  button {
-    width: 36px;
+  & > button {
+    min-width: 36px;
   }
 `;
 
