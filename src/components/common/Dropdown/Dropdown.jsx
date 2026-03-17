@@ -1,7 +1,7 @@
 import * as S from "./DropdownStyle";
 import arrowTopIcon from "../../../assets/icons/arrow_top.svg";
 import arrowBottomIcon from "../../../assets/icons/arrow_bottom.svg";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 /**
  * Dropdown Component
@@ -12,6 +12,17 @@ import { useState } from "react";
 
 export const Dropdown = ({ type, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
 
   const handleClickDropdown = () => {
     setIsOpen((prev) => !prev);
@@ -23,7 +34,7 @@ export const Dropdown = ({ type, value, onChange }) => {
   };
 
   return (
-    <S.DropdownContainer onClick={handleClickDropdown}>
+    <S.DropdownContainer ref={ref} onClick={handleClickDropdown}>
       <S.LabelContainer>
         <S.Label>{value}</S.Label>
         <S.ArrowIcon src={isOpen ? arrowTopIcon : arrowBottomIcon} />
