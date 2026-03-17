@@ -8,6 +8,7 @@ import { Button, EmojiButton } from "../../components/common/Button/Button";
 import EmojiBadge from "../../components/common/EmojiBadge/EmojiBadge";
 import useToast from "../../hooks/useToast";
 import successIcon from "/src/assets/icons/success.svg";
+import shareIcon from "/src/assets/icons/share.svg";
 import BACKGROUND_COLORS from "../../constants/backgroundColors";
 import { getRollingPaper } from "../../lib/api/rollingPaper";
 import { getMessageList } from "../../lib/api/message";
@@ -271,7 +272,7 @@ const PostMessageHeader = ({
                   ))}
                   {topReactions.length > 3 && (
                     <S.MoreReactionBtn onClick={toggleReactionAll}>
-                      {showReactionAll ? "▲" : "▼"}
+                      {showReactionAll ? "◀" : "▶"}
                     </S.MoreReactionBtn>
                   )}
                 </S.ReactionList>
@@ -295,13 +296,7 @@ const PostMessageHeader = ({
             <S.VertDivider />
 
             <S.RelativeWrap>
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={handleShareButtonClick}
-              >
-                공유
-              </Button>
+              <EmojiButton icon={shareIcon} onClick={handleShareButtonClick} />
               {showShareMenu && (
                 <ShareDropdown
                   recipientName={recipient?.name ?? ""}
@@ -315,20 +310,48 @@ const PostMessageHeader = ({
       </S.HeaderInner>
 
       <S.MobileSecondRow>
-        {topReactions.length > 0 && (
-          <>
-            <S.ReactionList>
-              {visibleReactions.map((r) => (
-                <EmojiBadge key={r.id} emoji={r.emoji} number={r.count} />
-              ))}
-            </S.ReactionList>
-            {topReactions.length > 3 && (
-              <S.MoreReactionBtn onClick={toggleReactionAll}>
-                {showReactionAll ? "▲" : "▼"}
-              </S.MoreReactionBtn>
+        <S.ReactionArea>
+          {topReactions.length > 0 && (
+            <>
+              <S.ReactionList>
+                {visibleReactions.map((r) => (
+                  <EmojiBadge key={r.id} emoji={r.emoji} number={r.count} />
+                ))}
+              </S.ReactionList>
+              {topReactions.length > 3 && (
+                <S.MoreReactionBtn onClick={toggleReactionAll}>
+                  {showReactionAll ? "▲" : "▼"}
+                </S.MoreReactionBtn>
+              )}
+            </>
+          )}
+        </S.ReactionArea>
+
+        <S.MobileActionGroup>
+          <S.RelativeWrap>
+            <EmojiButton onClick={handleEmojiButtonClick} />
+            {showEmojiPicker && (
+              <EmojiPickerPopover
+                recipientId={recipientId}
+                onClose={() => setShowEmojiPicker(false)}
+                onReacted={onReacted}
+              />
             )}
-          </>
-        )}
+          </S.RelativeWrap>
+
+          <S.VertDivider />
+
+          <S.RelativeWrap>
+            <EmojiButton icon={shareIcon} onClick={handleShareButtonClick} />
+            {showShareMenu && (
+              <ShareDropdown
+                recipientName={recipient?.name ?? ""}
+                onClose={() => setShowShareMenu(false)}
+                onUrlCopied={onUrlCopied}
+              />
+            )}
+          </S.RelativeWrap>
+        </S.MobileActionGroup>
       </S.MobileSecondRow>
     </S.HeaderBar>
   );
