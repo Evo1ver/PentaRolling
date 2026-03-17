@@ -88,7 +88,7 @@ export const Script = styled.p`
   }
 `;
 
-export const FirstScriptBr = styled.br`
+export const FirstScriptBr = styled.br`d
   display: none;
 
   @media (width >= ${TABLET_BREAKPOINT}) {
@@ -166,5 +166,6 @@ export const ButtonWrapper = styled.div`
 
   @media (width >= ${TABLET_BREAKPOINT}) {
     width: 280px;
+    padding: 0;
   }
 `;
