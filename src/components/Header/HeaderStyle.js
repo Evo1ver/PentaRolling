@@ -22,7 +22,7 @@ export const HeaderContents = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1248px;
+  max-width: 1200px;
   height: 40px;
   padding: 0px 24px;
   margin: 0 auto;
