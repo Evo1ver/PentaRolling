@@ -24,9 +24,9 @@ export const Left = styled.div`
 export const Title = styled.div`
   font: var(--font-20-regular);
 
-  div {
-    margin-bottom: 6px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 `;
 
 export const Name = styled.span`
