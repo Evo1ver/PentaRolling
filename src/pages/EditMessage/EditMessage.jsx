@@ -23,13 +23,6 @@ const BG_COLOR_MAP = Object.fromEntries(
   BACKGROUND_COLORS.map(({ label, color }) => [label, color]),
 );
 
-const parseContent = (raw) => {
-  if (!raw) return "";
-  return new DOMParser()
-    .parseFromString(raw, "text/html")
-    .body.textContent.trim();
-};
-
 const getTopReactions = (reactions) =>
   [...reactions].sort((a, b) => b.count - a.count).slice(0, 6);
 
@@ -488,7 +481,7 @@ const PostMessage = () => {
                 name={msg.sender}
                 relationship={msg.relationship}
                 profileImg={msg.profileImageURL}
-                content={parseContent(msg.content)}
+                content={msg.content}
                 date={formatDate(msg.createdAt)}
                 showDeleteButton
                 onDelete={() => handleMessageDelete(msg.id)}
