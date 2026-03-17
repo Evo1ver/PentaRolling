@@ -169,12 +169,15 @@ export const Footer = styled.footer`
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
+    width: 64px !important;
+    height: 40px !important;
+    font-size: 16px;
   }
 
   @media (max-width: 767px) {
     flex-wrap: nowrap;
     justify-content: flex-start;
-    gap: 6px;
+    gap: 3px;
     min-width: 0;
     overflow: hidden;
     padding-left: 10px;
@@ -187,9 +190,11 @@ export const Footer = styled.footer`
 
     & > div {
       padding: 10px 10px;
-      font-size: 12px;
       line-height: 1;
       flex-shrink: 0;
+      width: 50px !important;
+      height: 33px !important;
+      font-size: 13px;
     }
   }
 `;
