@@ -3,7 +3,6 @@ import Header from "./components/Header/Header";
 import MainPage from "./pages/MainPage/MainPage";
 import ListPage from "./pages/ListPage/ListPage";
 import CreateRollingPaperPage from "./pages/CreateRollingPaperPage/CreateRollingPaperPage";
-import APITest from "./pages/Test/APITest";
 import useBreakPoint from "./hooks/useBreakPoint";
 import PostMessage from "./pages/PostMessage/PostMessage";
 import EditMessage from "./pages/EditMessage/EditMessage";
@@ -32,7 +31,6 @@ const App = () => {
           element={<UpdateMessage />}
         />
         <Route path="/post/:id/edit" element={<EditMessage />} />
-        <Route path="/test" element={<APITest />} />
       </Routes>
     </>
   );
