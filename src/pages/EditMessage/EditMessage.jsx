@@ -24,13 +24,6 @@ const BG_COLOR_MAP = Object.fromEntries(
   BACKGROUND_COLORS.map(({ label, color }) => [label, color]),
 );
 
-const parseContent = (raw) => {
-  if (!raw) return "";
-  return new DOMParser()
-    .parseFromString(raw, "text/html")
-    .body.textContent.trim();
-};
-
 const getTopReactions = (reactions) =>
   [...reactions].sort((a, b) => b.count - a.count).slice(0, 6);
 
@@ -394,10 +387,9 @@ const PostMessage = () => {
     });
   };
 
-  const handleMessageDelete = (msgId) => {
+  const handleMessageDelete = async (msgId) => {
     try {
-      deleteMessage(msgId);
-      console.log("실행됨");
+      await deleteMessage(msgId);
 
       removeMessage(msgId);
 
@@ -411,15 +403,17 @@ const PostMessage = () => {
     }
   };
 
-  const handleRollingPaperDelete = () => {
-    const res = deleteRollingPaper(id);
-    if (res) {
+  const handleRollingPaperDelete = async () => {
+    try {
+      await deleteRollingPaper(id);
       createToast({
         message: "롤링페이퍼가 삭제되었습니다.",
         icon: successIcon,
         duration: 5,
       });
       navigate("/list");
+    } catch (error) {
+      console.error("롤링페이퍼 삭제 중 오류:", error);
     }
   };
 
@@ -485,7 +479,7 @@ const PostMessage = () => {
                 name={msg.sender}
                 relationship={msg.relationship}
                 profileImg={msg.profileImageURL}
-                content={parseContent(msg.content)}
+                content={msg.content}
                 date={formatDate(msg.createdAt)}
                 showDeleteButton
                 onDelete={() => handleMessageDelete(msg.id)}
