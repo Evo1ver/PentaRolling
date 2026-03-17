@@ -23,7 +23,7 @@ export const FormContainer = styled.main`
   display: flex;
   flex-direction: column;
   gap: 50px;
-  padding: 24px 20px 180px;
+  padding: 24px 20px 240px;
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
@@ -40,13 +40,13 @@ export const FormContainer = styled.main`
     `}
 
   @media (min-width: ${TABLET}) {
-    padding: 104px 24px 180px;
+    padding: 104px 24px 240px;
     max-width: 860px;
 
     ${({ $hasBackgroundImage }) =>
       $hasBackgroundImage &&
       css`
-        padding: 40px 40px 180px;
+        padding: 40px 40px 240px;
         margin-top: 24px;
         margin-bottom: 100px;
         border-radius: 16px;
