@@ -396,10 +396,9 @@ const PostMessage = () => {
     });
   };
 
-  const handleMessageDelete = (msgId) => {
+  const handleMessageDelete = async (msgId) => {
     try {
-      deleteMessage(msgId);
-      console.log("실행됨");
+      await deleteMessage(msgId);
 
       removeMessage(msgId);
 
@@ -413,15 +412,17 @@ const PostMessage = () => {
     }
   };
 
-  const handleRollingPaperDelete = () => {
-    const res = deleteRollingPaper(id);
-    if (res) {
+  const handleRollingPaperDelete = async () => {
+    try {
+      await deleteRollingPaper(id);
       createToast({
         message: "롤링페이퍼가 삭제되었습니다.",
         icon: successIcon,
         duration: 5,
       });
       navigate("/list");
+    } catch (error) {
+      console.error("롤링페이퍼 삭제 중 오류:", error);
     }
   };
 
