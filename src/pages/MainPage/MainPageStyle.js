@@ -88,7 +88,7 @@ export const Script = styled.p`
   }
 `;
 
-export const FirstScriptBr = styled.br`d
+export const FirstScriptBr = styled.br`
   display: none;
 
   @media (width >= ${TABLET_BREAKPOINT}) {
