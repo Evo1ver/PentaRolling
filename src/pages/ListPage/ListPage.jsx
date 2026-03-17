@@ -38,11 +38,23 @@ const ListPage = () => {
 
   const getTotalPages = (cards) => Math.ceil(cards.length / PAGE_SIZE);
 
-  const scrollToPage = (ref, page) => {
+  const scrollToPage = (ref, page, cardsLength) => {
     const el = ref.current;
     if (!el) return;
+
+    const totalCards = cardsLength ?? 0;
+    const totalPages = Math.max(Math.ceil(totalCards / PAGE_SIZE) - 1, 0);
+
+    const isLastPage = page === totalPages && totalCards > PAGE_SIZE;
+    const hasRemainder = totalCards % PAGE_SIZE !== 0;
+
+    const left =
+      isLastPage && hasRemainder
+        ? (totalCards - PAGE_SIZE) * CARD_STRIDE
+        : page * CARD_STRIDE * PAGE_SIZE;
+
     el.scrollTo({
-      left: page * CARD_STRIDE * PAGE_SIZE,
+      left,
       behavior: "smooth",
     });
   };
@@ -52,7 +64,7 @@ const ListPage = () => {
       try {
         setIsLoadingPopular(true);
         const response = await axios.get(API_URL, {
-          params: { limit: 8, offset: 0, sort: "like" },
+          params: { limit: 100, offset: 0, sort: "like" },
         });
         const results = response.data.results || [];
         const sorted = [...results].sort(
@@ -71,7 +83,7 @@ const ListPage = () => {
       try {
         setIsLoadingRecent(true);
         const response = await axios.get(API_URL, {
-          params: { limit: 8, offset: 0 },
+          params: { limit: 100, offset: 0 },
         });
         setRecentCards(response.data.results);
         setRecentPage(0);
@@ -96,7 +108,7 @@ const ListPage = () => {
     if (nextPage === currentPage) return;
 
     setPage(nextPage);
-    scrollToPage(ref, nextPage);
+    scrollToPage(ref, nextPage, cards.length);
   };
 
   const renderCardList = (cards) => {
