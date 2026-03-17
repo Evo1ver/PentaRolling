@@ -37,16 +37,23 @@ const CardList = ({
         </S.Header>
 
         <S.Body>
-          <S.AvatarGroup>
-            {firstAvatars.map((url) => (
-              <S.AvatarItem key={url}>
-                <Avatar src={url} size="xsmall" />
-              </S.AvatarItem>
-            ))}
-            {showExtraCount && <S.CountBadge>+{countBadgeCount}</S.CountBadge>}
-          </S.AvatarGroup>
+          {(firstAvatars.length > 0 || showExtraCount) && (
+            <S.AvatarGroup>
+              {firstAvatars.map((url) => (
+                <S.AvatarItem key={url}>
+                  <Avatar src={url} size="xsmall" />
+                </S.AvatarItem>
+              ))}
+              {showExtraCount && (
+                <S.CountBadge>+{countBadgeCount}</S.CountBadge>
+              )}
+            </S.AvatarGroup>
+          )}
 
-          <S.MessageText $backgroundImageUrl={backgroundImageUrl}>
+          <S.MessageText
+            $backgroundImageUrl={backgroundImageUrl}
+            $isEmptyState={firstAvatars.length === 0 && !showExtraCount}
+          >
             {typeof messageCount === "number" && messageCount > 0 ? (
               <>
                 <span className="count-bold">{messageCount}</span>명이

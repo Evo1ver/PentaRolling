@@ -16,6 +16,8 @@ const InputContainer = styled.div`
 
 const Label = styled.label`
   font: var(--font-24-bold);
+  color: ${({ $hasBackgroundImage }) =>
+    $hasBackgroundImage ? "var(--white)" : "inherit"};
 `;
 const InputContents = styled.input`
   padding: 12px 16px;

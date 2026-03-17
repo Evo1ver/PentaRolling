@@ -14,9 +14,6 @@ const CARD_STRIDE = CARD_WIDTH + CARD_GAP;
 
 const parseName = (name) => name.split("/")[0];
 
-const getTotalReactionCount = (card) =>
-  (card.topReactions || []).reduce((sum, r) => sum + (r.count ?? 0), 0);
-
 const getTrailingSpacerWidth = (count) => {
   if (count <= PAGE_SIZE) return 0;
 
@@ -34,16 +31,30 @@ const ListPage = () => {
 
   const [popularCards, setPopularCards] = useState([]);
   const [recentCards, setRecentCards] = useState([]);
+  const [isLoadingPopular, setIsLoadingPopular] = useState(true);
+  const [isLoadingRecent, setIsLoadingRecent] = useState(true);
   const [popularPage, setPopularPage] = useState(0);
   const [recentPage, setRecentPage] = useState(0);
 
   const getTotalPages = (cards) => Math.ceil(cards.length / PAGE_SIZE);
 
-  const scrollToPage = (ref, page) => {
+  const scrollToPage = (ref, page, cardsLength) => {
     const el = ref.current;
     if (!el) return;
+
+    const totalCards = cardsLength ?? 0;
+    const totalPages = Math.max(Math.ceil(totalCards / PAGE_SIZE) - 1, 0);
+
+    const isLastPage = page === totalPages && totalCards > PAGE_SIZE;
+    const hasRemainder = totalCards % PAGE_SIZE !== 0;
+
+    const left =
+      isLastPage && hasRemainder
+        ? (totalCards - PAGE_SIZE) * CARD_STRIDE
+        : page * CARD_STRIDE * PAGE_SIZE;
+
     el.scrollTo({
-      left: page * CARD_STRIDE * PAGE_SIZE,
+      left,
       behavior: "smooth",
     });
   };
@@ -51,29 +62,35 @@ const ListPage = () => {
   useEffect(() => {
     const fetchPopular = async () => {
       try {
+        setIsLoadingPopular(true);
         const response = await axios.get(API_URL, {
-          params: { limit: 8, offset: 0, sort: "like" },
+          params: { limit: 100, offset: 0, sort: "like" },
         });
         const results = response.data.results || [];
         const sorted = [...results].sort(
-          (a, b) => getTotalReactionCount(b) - getTotalReactionCount(a),
+          (a, b) => (b.messageCount ?? 0) - (a.messageCount ?? 0),
         );
         setPopularCards(sorted);
         setPopularPage(0);
       } catch (error) {
         console.error("인기 데이터 불러오기 실패:", error);
+      } finally {
+        setIsLoadingPopular(false);
       }
     };
 
     const fetchRecent = async () => {
       try {
+        setIsLoadingRecent(true);
         const response = await axios.get(API_URL, {
-          params: { limit: 8, offset: 0 },
+          params: { limit: 100, offset: 0 },
         });
         setRecentCards(response.data.results);
         setRecentPage(0);
       } catch (error) {
         console.error("최근 데이터 불러오기 실패:", error);
+      } finally {
+        setIsLoadingRecent(false);
       }
     };
 
@@ -91,7 +108,7 @@ const ListPage = () => {
     if (nextPage === currentPage) return;
 
     setPage(nextPage);
-    scrollToPage(ref, nextPage);
+    scrollToPage(ref, nextPage, cards.length);
   };
 
   const renderCardList = (cards) => {
@@ -119,6 +136,16 @@ const ListPage = () => {
     );
   };
 
+  const renderSkeletonList = () => {
+    return (
+      <>
+        {Array.from({ length: PAGE_SIZE }).map((_, index) => (
+          <S.SkeletonCard key={index} />
+        ))}
+      </>
+    );
+  };
+
   const popularLastPage = Math.max(getTotalPages(popularCards) - 1, 0);
   const recentLastPage = Math.max(getTotalPages(recentCards) - 1, 0);
 
@@ -129,7 +156,7 @@ const ListPage = () => {
         <S.Section>
           <S.Title>인기 롤링 페이퍼 🔥</S.Title>
           <S.CardSection>
-            {popularPage > 0 && (
+            {!isLoadingPopular && popularPage > 0 && (
               <S.ArrowButtonWrapper $direction="left">
                 <ArrowButton
                   direction="left"
@@ -146,9 +173,11 @@ const ListPage = () => {
               </S.ArrowButtonWrapper>
             )}
             <S.CardWrapper ref={popularRef}>
-              {renderCardList(popularCards)}
+              {isLoadingPopular
+                ? renderSkeletonList()
+                : renderCardList(popularCards)}
             </S.CardWrapper>
-            {popularPage < popularLastPage && (
+            {!isLoadingPopular && popularPage < popularLastPage && (
               <S.ArrowButtonWrapper $direction="right">
                 <ArrowButton
                   direction="right"
@@ -170,7 +199,7 @@ const ListPage = () => {
         <S.Section>
           <S.Title>최근에 만든 롤링 페이퍼 ⭐</S.Title>
           <S.CardSection>
-            {recentPage > 0 && (
+            {!isLoadingRecent && recentPage > 0 && (
               <S.ArrowButtonWrapper $direction="left">
                 <ArrowButton
                   direction="left"
@@ -187,9 +216,11 @@ const ListPage = () => {
               </S.ArrowButtonWrapper>
             )}
             <S.CardWrapper ref={recentRef}>
-              {renderCardList(recentCards)}
+              {isLoadingRecent
+                ? renderSkeletonList()
+                : renderCardList(recentCards)}
             </S.CardWrapper>
-            {recentPage < recentLastPage && (
+            {!isLoadingRecent && recentPage < recentLastPage && (
               <S.ArrowButtonWrapper $direction="right">
                 <ArrowButton
                   direction="right"

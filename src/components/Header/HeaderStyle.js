@@ -22,7 +22,7 @@ export const HeaderContents = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1248px;
+  max-width: 1200px;
   height: 40px;
   padding: 0px 24px;
   margin: 0 auto;
@@ -39,7 +39,7 @@ export const HeaderButton = styled(Button)`
   font: var(--font-14-bold);
 
   @media (width >= ${MOBLIE_BREAKPOINT}) {
-    width: 152px;
+    width: 100%;
     font: var(--font-16-bold);
   }
 `;

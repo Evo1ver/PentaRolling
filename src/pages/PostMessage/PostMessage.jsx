@@ -8,6 +8,7 @@ import { Button, EmojiButton } from "../../components/common/Button/Button";
 import EmojiBadge from "../../components/common/EmojiBadge/EmojiBadge";
 import useToast from "../../hooks/useToast";
 import successIcon from "/src/assets/icons/success.svg";
+import shareIcon from "/src/assets/icons/share.svg";
 import BACKGROUND_COLORS from "../../constants/backgroundColors";
 import { getRollingPaper } from "../../lib/api/rollingPaper";
 import { getMessageList } from "../../lib/api/message";
@@ -24,13 +25,6 @@ const formatDate = (dateStr) => {
   if (!dateStr) return "";
   const d = new Date(dateStr);
   return `${d.getFullYear()}. ${String(d.getMonth() + 1).padStart(2, "0")}. ${String(d.getDate()).padStart(2, "0")}`;
-};
-
-const parseContent = (raw) => {
-  if (!raw) return "";
-  return new DOMParser()
-    .parseFromString(raw, "text/html")
-    .body.textContent.trim();
 };
 
 const getTopReactions = (reactions) =>
@@ -148,10 +142,13 @@ const ShareDropdown = ({ recipientName, onClose, onUrlCopied }) => {
   }, [onClose]);
 
   const handleKakaoShare = () => {
-    if (!window.Kakao?.isInitialized()) {
-      alert("카카오 SDK가 초기화되지 않았습니다.");
+    if (!window.Kakao) {
+      alert("카카오 SDK를 불러올 수 없습니다.");
       onClose();
       return;
+    }
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(import.meta.env.VITE_KAKAO_JS_KEY);
     }
     window.Kakao.Share.sendDefault({
       objectType: "feed",
@@ -271,7 +268,7 @@ const PostMessageHeader = ({
                   ))}
                   {topReactions.length > 3 && (
                     <S.MoreReactionBtn onClick={toggleReactionAll}>
-                      {showReactionAll ? "▲" : "▼"}
+                      {showReactionAll ? "◀" : "▶"}
                     </S.MoreReactionBtn>
                   )}
                 </S.ReactionList>
@@ -295,13 +292,7 @@ const PostMessageHeader = ({
             <S.VertDivider />
 
             <S.RelativeWrap>
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={handleShareButtonClick}
-              >
-                공유
-              </Button>
+              <EmojiButton icon={shareIcon} onClick={handleShareButtonClick} />
               {showShareMenu && (
                 <ShareDropdown
                   recipientName={recipient?.name ?? ""}
@@ -315,20 +306,48 @@ const PostMessageHeader = ({
       </S.HeaderInner>
 
       <S.MobileSecondRow>
-        {topReactions.length > 0 && (
-          <>
-            <S.ReactionList>
-              {visibleReactions.map((r) => (
-                <EmojiBadge key={r.id} emoji={r.emoji} number={r.count} />
-              ))}
-            </S.ReactionList>
-            {topReactions.length > 3 && (
-              <S.MoreReactionBtn onClick={toggleReactionAll}>
-                {showReactionAll ? "▲" : "▼"}
-              </S.MoreReactionBtn>
+        <S.ReactionArea>
+          {topReactions.length > 0 && (
+            <>
+              <S.ReactionList>
+                {visibleReactions.map((r) => (
+                  <EmojiBadge key={r.id} emoji={r.emoji} number={r.count} />
+                ))}
+              </S.ReactionList>
+              {topReactions.length > 3 && (
+                <S.MoreReactionBtn onClick={toggleReactionAll}>
+                  {showReactionAll ? "▲" : "▼"}
+                </S.MoreReactionBtn>
+              )}
+            </>
+          )}
+        </S.ReactionArea>
+
+        <S.MobileActionGroup>
+          <S.RelativeWrap>
+            <EmojiButton onClick={handleEmojiButtonClick} />
+            {showEmojiPicker && (
+              <EmojiPickerPopover
+                recipientId={recipientId}
+                onClose={() => setShowEmojiPicker(false)}
+                onReacted={onReacted}
+              />
             )}
-          </>
-        )}
+          </S.RelativeWrap>
+
+          <S.VertDivider />
+
+          <S.RelativeWrap>
+            <EmojiButton icon={shareIcon} onClick={handleShareButtonClick} />
+            {showShareMenu && (
+              <ShareDropdown
+                recipientName={recipient?.name ?? ""}
+                onClose={() => setShowShareMenu(false)}
+                onUrlCopied={onUrlCopied}
+              />
+            )}
+          </S.RelativeWrap>
+        </S.MobileActionGroup>
       </S.MobileSecondRow>
     </S.HeaderBar>
   );
@@ -427,7 +446,7 @@ const PostMessage = () => {
                 name={msg.sender}
                 relationship={msg.relationship}
                 profileImg={msg.profileImageURL}
-                content={parseContent(msg.content)}
+                content={msg.content}
                 date={formatDate(msg.createdAt)}
               />
               <S.CardClickOverlay
@@ -446,7 +465,7 @@ const PostMessage = () => {
         <CardModal
           name={selectedMsg.sender}
           relationship={selectedMsg.relationship}
-          content={parseContent(selectedMsg.content)}
+          content={selectedMsg.content}
           createdDate={formatDate(selectedMsg.createdAt)}
           profileImg={selectedMsg.profileImageURL}
           fonts={selectedMsg.font}
