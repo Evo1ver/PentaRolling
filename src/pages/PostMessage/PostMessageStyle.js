@@ -15,10 +15,6 @@ export const PageWrapper = styled.div`
       background-position: center;
       background-attachment: fixed;
     `}
-
-  ${tablet} {
-    min-height: calc(100vh - 64px);
-  }
 `;
 
 // ─────────────────────────────────────────────
