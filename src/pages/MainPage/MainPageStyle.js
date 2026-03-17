@@ -51,7 +51,7 @@ export const PointContainer = styled.div`
 
 export const PointLabel = styled.span`
   padding: 6px 12px;
-  width: 82px;
+  width: 90px;
   height: 32px;
   border-radius: 50px;
   background-color: #95cce4;
